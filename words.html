@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth antialiased">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="gallery/blw logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words from the Man of God | BLW Campus Ministry — Tanzania Zone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        *, body, h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        body { background-color: #F8FAFC; color: #1E293B; }
+        .font-editorial, h1, h2, h3 { font-family: 'Poppins', sans-serif !important; font-weight: 800 !important; letter-spacing: -0.015em; }
+        .editorial-card { background: #FFFFFF; border: 1px solid #E2E8F0; box-shadow: 0 10px 30px -10px rgba(11, 29, 58, 0.08); transition: all 0.3s ease; }
+        .reveal-on-scroll { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-on-scroll.is-revealed { opacity: 1; transform: none; }
+        @keyframes goldShimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        @keyframes preloaderSweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+        .preloader-gold-text { font-family: 'Poppins', sans-serif !important; font-weight: 900 !important; background: linear-gradient(90deg, #B87B14 0%, #F3CA7A 25%, #FFF6D6 50%, #F3CA7A 75%, #D99B26 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: goldShimmer 2s linear infinite; filter: drop-shadow(0 4px 18px rgba(217, 155, 38, 0.35)); }
+        .preloader-bar { width: 50%; background: linear-gradient(90deg, transparent, #F3CA7A, #D99B26, transparent); animation: preloaderSweep 1.1s ease-in-out infinite; }
+        #page-preloader.is-done { opacity: 0; pointer-events: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <div id="page-preloader" class="fixed inset-0 z-[200] bg-[#081428] flex flex-col items-center justify-center px-6 text-center transition-opacity duration-500">
+        <img src="gallery/blw logo.png" alt="BLW Logo" class="w-16 h-16 object-contain mb-5 animate-pulse">
+        <div class="preloader-gold-text text-2xl sm:text-4xl font-black tracking-[0.18em] uppercase">BLW TANZANIA ZONE</div>
+        <div class="mt-5 w-48 h-1 rounded-full bg-white/10 overflow-hidden"><div class="preloader-bar h-full rounded-full"></div></div>
+    </div>
+    <header class="sticky top-0 z-50 shadow-sm">
+        <nav class="bg-white/95 backdrop-blur-md border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between py-3 gap-4">
+                <a href="blw_campus_ministry_tanzania_zone.html" class="flex items-center gap-3 group shrink-0">
+                    <div class="w-11 h-11 rounded-xl bg-[#0B1D3A] p-1.5 flex items-center justify-center shadow-md"><img src="gallery/blw logo.png" alt="BLW Logo" class="w-full h-full object-contain"></div>
+                    <div>
+                        <div class="flex items-center gap-2"><span class="font-extrabold text-sm sm:text-base tracking-wide text-[#0B1D3A]">BLW CAMPUS</span><span class="text-[9px] uppercase tracking-widest font-bold px-2 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-[#B87B14]">TZ ZONE</span></div>
+                        <p class="text-[11px] text-slate-500 font-medium">Believers' Loveworld Inc.</p>
+                    </div>
+                </a>
+                <div class="flex items-center gap-3 sm:gap-6">
+                    <div class="hidden sm:flex items-center gap-6">
+                        <a href="blw_campus_ministry_tanzania_zone.html" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#0B1D3A] transition">Home</a>
+                        <a href="blw_campus_ministry_tanzania_zone.html#moments" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#0B1D3A] transition">Moments &amp; Events</a>
+                        <a href="lipablw.html" class="px-4 py-2 rounded-lg bg-[#D99B26] hover:bg-[#c58a1c] text-white font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-1.5"><i data-lucide="heart-handshake" class="w-4 h-4"></i><span>Partner</span></a>
+                    </div>
+                    <button id="mobile-menu-toggle" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-[#0B1D3A] transition flex items-center gap-2" aria-label="Open navigation menu"><i data-lucide="menu" class="w-5 h-5"></i><span class="hidden md:inline text-xs font-bold uppercase tracking-wider">Menu</span></button>
+                </div>
+            </div>
+            <div id="mobile-drawer" class="hidden bg-white border-t border-slate-200 shadow-xl">
+                <div class="max-w-7xl mx-auto px-5 sm:px-8 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <a href="blw_campus_ministry_tanzania_zone.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="home" class="w-4 h-4 text-[#D99B26]"></i><span>Home</span></a>
+                    <a href="blw_campus_ministry_tanzania_zone.html#about" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="info" class="w-4 h-4 text-[#D99B26]"></i><span>About BLW &amp; Our Belief</span></a>
+                    <a href="blw_campus_ministry_tanzania_zone.html#moments" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="image" class="w-4 h-4 text-[#D99B26]"></i><span>Moments &amp; Events</span></a>
+                    <a href="vision.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="eye" class="w-4 h-4 text-[#D99B26]"></i><span>Our Vision &amp; Mission</span></a>
+                    <a href="purpose.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="compass" class="w-4 h-4 text-[#D99B26]"></i><span>Our Purpose</span></a>
+                    <a href="principles.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="award" class="w-4 h-4 text-[#D99B26]"></i><span>Three Core Principles</span></a>
+                    <a href="words.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-50 border border-amber-200 text-sm font-bold text-[#9A6309]"><i data-lucide="quote" class="w-4 h-4 text-[#D99B26]"></i><span>Words from the Man of God</span></a>
+                    <a href="blw_campus_ministry_tanzania_zone.html#leadership" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="users" class="w-4 h-4 text-[#D99B26]"></i><span>Leadership of BLW</span></a>
+                    <a href="blw_campus_ministry_tanzania_zone.html#programs" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="calendar" class="w-4 h-4 text-[#D99B26]"></i><span>Fellowship &amp; Global Summits</span></a>
+                    <a href="blw_campus_ministry_tanzania_zone.html#campuses" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 text-sm font-semibold text-[#0B1D3A]"><i data-lucide="graduation-cap" class="w-4 h-4 text-[#D99B26]"></i><span>Campus Fellowship Portal</span></a>
+                    <a href="lipablw.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-sm font-bold text-[#9A6309]"><i data-lucide="heart-handshake" class="w-4 h-4 text-[#D99B26]"></i><span>Partner (M-Pesa Lipa)</span></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="relative py-16 bg-[#0B1D3A] text-white overflow-hidden">
+        <img src="gallery/PST CHRIS BIBLE.png" alt="" class="absolute inset-0 w-full h-full object-cover object-top opacity-20">
+        <div class="relative z-10 max-w-5xl mx-auto px-5 sm:px-8 text-center space-y-3">
+            <h1 id="cms-quotes-title" class="font-editorial text-3xl sm:text-5xl font-bold text-white">Words from the Man of God</h1>
+            <p id="cms-quotes-sub" class="text-sm sm:text-base text-slate-200 max-w-2xl mx-auto">Foundational doctrines by Rev. (Dr.) Chris Oyakhilome D.Sc., D.Sc., D.D.</p>
+        </div>
+    </section>
+
+    <main class="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 py-16 space-y-10">
+        <div class="editorial-card reveal-on-scroll rounded-2xl p-8 sm:p-10 relative">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-1 text-[#D99B26]">
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="quote-prev" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-[#0B1D3A] transition" aria-label="Previous teaching"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                    <button id="quote-next" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-[#0B1D3A] transition" aria-label="Next teaching"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+            <div class="text-[#D99B26] text-4xl font-serif leading-none mb-2">&ldquo;</div>
+            <p id="active-quote-text" class="font-editorial text-xl sm:text-2xl md:text-3xl font-semibold text-[#0B1D3A] leading-relaxed transition-opacity duration-200">
+                If you act your faith, you may look foolish for five minutes; but if you don't act your faith, you may be foolish forever.
+            </p>
+            <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span id="active-quote-author" class="text-xs uppercase tracking-widest text-[#B87B14] font-bold block">Pastor Chris Oyakhilome</span>
+                    <span id="active-quote-role" class="text-xs text-slate-500">President, Believers' LoveWorld Inc.</span>
+                </div>
+                <button id="copy-active-quote" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-[#0B1D3A] hover:text-white border border-slate-200 text-xs font-semibold text-[#0B1D3A] flex items-center gap-2 self-start transition">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    <span id="copy-quote-label">Copy Teaching</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="quotes-list-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </main>
+
+    <footer class="bg-[#081428] text-slate-300 py-10 px-5 sm:px-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div class="flex items-center gap-3">
+                <img src="gallery/blw logo.png" alt="BLW Logo" class="w-9 h-9 object-contain">
+                <span>© 2026 BLW Campus Ministry — Tanzania Zone. All Rights Reserved.</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <a href="blw_campus_ministry_tanzania_zone.html" class="hover:text-[#F3CA7A]">Home</a>
+                <a href="vision.html" class="hover:text-[#F3CA7A]">Vision &amp; Mission</a>
+                <a href="purpose.html" class="hover:text-[#F3CA7A]">Our Purpose</a>
+                <a href="principles.html" class="hover:text-[#F3CA7A]">Core Principles</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        (function initPreloader() {
+            const p = document.getElementById('page-preloader');
+            if (!p) return;
+            const hide = () => { if (p.classList.contains('is-done')) return; p.classList.add('is-done'); setTimeout(() => { p.style.display = 'none'; }, 550); };
+            window.addEventListener('load', () => setTimeout(hide, 450));
+            setTimeout(hide, 1800);
+        })();
+        function initScrollAnimations() {
+            const els = document.querySelectorAll('.reveal-on-scroll');
+            if (!els.length) return;
+            if ('IntersectionObserver' in window) {
+                const obs = new IntersectionObserver((entries, o) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-revealed'); o.unobserve(e.target); } }); }, { threshold: 0.08 });
+                els.forEach(el => obs.observe(el));
+            } else { els.forEach(el => el.classList.add('is-revealed')); }
+        }
+        document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('mobile-drawer')?.classList.toggle('hidden');
+        });
+        function escapeHtml(s) {
+            return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+        let teachings = [
+            { text: "If you act your faith, you may look foolish for five minutes; but if you don't act your faith, you may be foolish forever.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." },
+            { text: "Success is impacting the world with the investment of your personality. Find a need and reach it; find a hurt and heal it.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." },
+            { text: "The Word of God is your life. Feed on it daily, meditate upon it, and you will make your way prosperous with good success.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." },
+            { text: "It's not where you live in the physical world; it's where you live in the spirit. That's what counts.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." },
+            { text: "Choose to win. If you don't choose to win you have chosen to fail. It's a choice you make for yourself.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." }
+        ];
+        let idx = 0;
+        const txtEl = document.getElementById('active-quote-text');
+        const authEl = document.getElementById('active-quote-author');
+        const roleEl = document.getElementById('active-quote-role');
+
+        function renderCurrent() {
+            const q = teachings[idx];
+            if (!q) return;
+            txtEl.textContent = q.text;
+            authEl.textContent = q.author || 'Pastor Chris Oyakhilome';
+            roleEl.textContent = q.authorRole || "President, Believers' LoveWorld Inc.";
+        }
+        function renderList() {
+            const grid = document.getElementById('quotes-list-grid');
+            grid.innerHTML = '';
+            teachings.forEach((q, i) => {
+                const c = document.createElement('div');
+                c.className = 'editorial-card reveal-on-scroll rounded-2xl p-6 cursor-pointer hover:border-[#D99B26] transition';
+                c.style.transitionDelay = `${(i % 2) * 80}ms`;
+                c.onclick = () => { idx = i; renderCurrent(); window.scrollTo({ top: 180, behavior: 'smooth' }); };
+                c.innerHTML = `<p class="font-editorial text-base font-semibold text-[#0B1D3A] leading-relaxed">&ldquo;${escapeHtml(q.text)}&rdquo;</p><p class="text-xs text-[#B87B14] font-bold mt-3">${escapeHtml(q.author || 'Pastor Chris Oyakhilome')}</p>`;
+                grid.appendChild(c);
+            });
+            initScrollAnimations();
+        }
+        document.getElementById('quote-prev')?.addEventListener('click', () => { idx = (idx - 1 + teachings.length) % teachings.length; renderCurrent(); });
+        document.getElementById('quote-next')?.addEventListener('click', () => { idx = (idx + 1) % teachings.length; renderCurrent(); });
+        document.getElementById('copy-active-quote')?.addEventListener('click', async () => {
+            const q = teachings[idx];
+            const str = `"${q.text}" — ${q.author}`;
+            try { await navigator.clipboard.writeText(str); } catch(e){}
+            const lbl = document.getElementById('copy-quote-label');
+            lbl.textContent = 'Copied!';
+            setTimeout(() => { lbl.textContent = 'Copy Teaching'; }, 2000);
+        });
+        renderList();
+        (async function hydrateQuotes() {
+            let data = null;
+            try { data = JSON.parse(localStorage.getItem('blw_campus_data')); } catch(e){}
+            if (!data) {
+                try { const r = await fetch('blw-data.json'); if (r.ok) data = await r.json(); } catch(e){}
+            }
+            if (data && data.quotesSection) {
+                if (data.quotesSection.title) document.getElementById('cms-quotes-title').textContent = data.quotesSection.title;
+                if (data.quotesSection.subtitle) document.getElementById('cms-quotes-sub').textContent = data.quotesSection.subtitle;
+                const active = (data.quotesSection.quotes || []).filter(q => !q.deleted && q.text);
+                if (active.length) {
+                    teachings = active;
+                    idx = 0;
+                    renderCurrent();
+                    renderList();
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

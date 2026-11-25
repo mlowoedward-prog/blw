@@ -1,0 +1,450 @@
+{
+  "brand": {
+    "navTitle": "BLW CAMPUS",
+    "navTag": "TZ ZONE",
+    "navSubtitle": "Believers' Loveworld Inc.",
+    "logoUrl": "gallery/blw logo.png"
+  },
+  "hero": {
+    "pillTag": "TANZANIA ZONE",
+    "pillSubtitle": "Believers' Loveworld Inc.",
+    "headlinePrefix": "WELCOME TO BLW CAMPUS MINISTRY",
+    "headlineHighlight": "TANZANIA ZONE",
+    "description": "Believers’ LoveWorld (BLW) Campus Ministry is the vibrant arm of Christ Embassy Church under our Dear Man of God, Pastor Chris Oyakhilome.",
+    "motto1": "GIVING YOUR LIFE A MEANING",
+    "motto2": "Building a happier world with love",
+    "cta1Text": "Connect To Your University",
+    "cta1Link": "#campuses",
+    "cta2Text": "Explore Moments & Events",
+    "cta2Link": "#moments",
+    "pastorChris": {
+      "image": "gallery/PST CHRIS BIBLE.png",
+      "badge": "Anointed Global Ministry",
+      "name": "Pastor Chris Oyakhilome Dsc. Dsc. DD",
+      "role": "President of Believers' Loveworld Inc. & Christ Embassy"
+    },
+    "stats": [
+      { "id": "stat-1", "value": "20+", "label": "Universities Active" },
+      { "id": "stat-2", "value": "10K+", "label": "Youths Impacted" },
+      { "id": "stat-3", "value": "100%", "label": "Spirit & Excellence" },
+      { "id": "stat-4", "value": "Global", "label": "Mandate & Reach" }
+    ]
+  },
+  "aboutSection": {
+    "tag": "",
+    "title": "About BLW Campus Ministry",
+    "registrationNote": "Believers’ LoveWorld Inc., also known as Christ Embassy, is a non-profit organization duly registered with the Tanzanian Government.",
+    "description": "Believers’ LoveWorld (BLW) Campus Ministry is the vibrant arm of Christ Embassy Church under our Dear Man of God, Pastor Chris Oyakhilome. It is responsible for reaching and impacting students and workers through campus fellowships established in numerous institutions across the world.",
+    "beliefTitle": "Our Belief",
+    "beliefStatement": "We strongly believe that young people are the future of a nation, and the university is the breeding ground for the next generation of leaders."
+  },
+  "momentsSection": {
+    "tag": "",
+    "title": "Moments & Events",
+    "description": "High-impact campus crusades, miraculous healing encounters, youth conferences, and nationwide evangelical campaigns.",
+    "badgeText": "4 High-Impact Events"
+  },
+  "moments": [
+    {
+      "id": "event-1",
+      "title": "OUTREACH ACTIVITIES",
+      "category": "outreach-activities",
+      "tagLabel": "Outreach Activities",
+      "location": "Campuses Across Tanzania",
+      "caption": "THOUSANDS OF UNIVERSITY YOUTHS GATHERED TO SATURATE THEIR CATCHMENT AREAS WITH THE RHAPSODY OF REALITIES.",
+      "image": "gallery/A Night Of A Thousands Crusades.jpeg"
+    },
+    {
+      "id": "event-2",
+      "title": "Healing Streams",
+      "category": "healing",
+      "tagLabel": "Healing Streams",
+      "location": "Live Broadcast Centers Tanzania",
+      "caption": "Experiencing the miraculous and supernatural healing power of God across university fellowship centers.",
+      "image": "gallery/Healing Streams.jpeg"
+    },
+    {
+      "id": "event-3",
+      "title": "TRAINING AND EMPOWERMENT PROGRAMS",
+      "category": "training-empowerment",
+      "tagLabel": "Training & Empowerment",
+      "location": "National Conference Arena",
+      "caption": "Ministry training, leadership development, and empowerment initiatives equipping university delegates, campus fellows, and student ministers for impact.",
+      "image": "gallery/National Youth Conference.JPG"
+    },
+    {
+      "id": "event-4",
+      "title": "Rhapsody Reach Out",
+      "category": "outreach",
+      "tagLabel": "Reach Out World",
+      "location": "Colleges Nationwide",
+      "caption": "Aggressive evangelism and massive distribution of Rhapsody of Realities daily devotional to university students.",
+      "image": "gallery/Rhapsody Reach Out.jpeg"
+    }
+  ],
+  "mandateSection": {
+    "tag": "",
+    "title": "Our Vision & Mission",
+    "cards": [
+      {
+        "id": "card-vision",
+        "step": "01 / Foundation",
+        "title": "Our Vision",
+        "description": "To take the divine presence of God to the nations and peoples of the world and to demonstrate the character of the Spirit."
+      },
+      {
+        "id": "card-mission",
+        "step": "02 / Empowerment",
+        "title": "Our Mission",
+        "description": "To raise generations of men and women who will come into their inheritance to fulfill God's dream."
+      }
+    ]
+  },
+  "purposeSection": {
+    "tag": "",
+    "title": "OUR PURPOSE",
+    "statement": "To make known and bring them into their inheritance.",
+    "motto": "Building a happier world with love"
+  },
+  "leadershipSection": {
+    "tag": "",
+    "title": "Leadership of BLW Campus Ministry",
+    "description": "Visionary ministers guiding student leaders, campus cells, and regional summits with divine wisdom, spiritual supremacy, and academic excellence."
+  },
+  "leadership": [
+    {
+      "id": "leader-0",
+      "name": "Rev. Dr. Chris Oyakhilome",
+      "title": "D.Sc., D.Sc., D.D.",
+      "region": "President, LoveWorld Inc.",
+      "tag": "International President",
+      "image": "gallery/PST CHRIS BIBLE.png",
+      "bio": "Founder and President of LoveWorld Inc. (Christ Embassy), taking God's divine presence to the nations and peoples of the world."
+    },
+    {
+      "id": "leader-1",
+      "name": "Pastor Famous Eineh",
+      "title": "Regional Secretary",
+      "region": "BLW East Central Africa",
+      "tag": "Regional Leadership",
+      "image": "gallery/Pastor Famous Eineh - Regional Secretary - BLW EAST CENTRAL AFRICA.jpg",
+      "bio": "Steering the supernatural spread of God's Word across colleges and universities throughout East and Central Africa with passion, excellence, and authority in the Spirit."
+    },
+    {
+      "id": "leader-2",
+      "name": "Pastor Jesse Julius",
+      "title": "Zonal Secretary",
+      "region": "BLW Tanzania Zone",
+      "tag": "Zonal Leadership",
+      "image": "gallery/Pastor Jesse Julius - Zonal Secretary - BLW TANZANIA ZONE.png",
+      "bio": "Spearheading campus fellowships, student activations, leadership mentoring, and the aggressive distribution of Rhapsody of Realities in all higher institutions across Tanzania."
+    }
+  ],
+  "principlesSection": {
+    "tag": "",
+    "title": "The Three Core Principles",
+    "description": "The supernatural paradigm that differentiates every BLW Campus ambassador globally.",
+    "principles": [
+      {
+        "id": "principle-1",
+        "tag": "Principle 01",
+        "title": "BLW Exceptionalism",
+        "description": "The theory and divine reality that we are uniquely different in some way; it connotes a superiority of ideology and supremacy of calling, which also confers on us the burden and responsibility of leadership for the whole world.",
+        "footerTag": "Supremacy of calling • Distinct mindset"
+      },
+      {
+        "id": "principle-2",
+        "tag": "Principle 02",
+        "title": "BLW Expansionism",
+        "description": "The doctrine and endeavor of expanding our reach and influence through the relentless spreading of our message. We have that calling that Abraham had to take over the world and there are no limits for us.",
+        "footerTag": "Global conquest • No territorial boundaries"
+      },
+      {
+        "id": "principle-3",
+        "tag": "Principle 03",
+        "title": "BLW Perfectionism",
+        "description": "The idea, doctrine, and disposition to regard anything short of perfect and excellent as unacceptable. We execute with divine precision, unmatched order, and supernatural brilliance.",
+        "footerTag": "Flawless execution • Supreme standard"
+      }
+    ]
+  },
+  "programsSection": {
+    "tag": "",
+    "title": "Fellowship & Global Summits",
+    "tabWeekly": "Campus Weekly Services",
+    "tabGlobal": "Global Programs with Pastor Chris",
+    "weekly": [
+      {
+        "id": "serv-1",
+        "tag": "Every Sunday",
+        "title": "Sunday Service",
+        "time": "9:00 AM – 12:00 PM",
+        "description": "A vibrant encounter in God's presence with high-impact praise, the profound teaching of the Word, and intense manifestations of the Spirit."
+      },
+      {
+        "id": "serv-2",
+        "tag": "Midweek Recharge",
+        "title": "Wednesday Service",
+        "time": "6:00 PM – 7:00 PM",
+        "description": "Mid-week spiritual fortification, doctrine deepening, and intercession to navigate academic life in absolute victory."
+      },
+      {
+        "id": "serv-3",
+        "tag": "Daily Communion",
+        "title": "Morning Prayers",
+        "time": "Monday – Friday: 5:00 AM – 6:00 AM",
+        "description": "Online morning devotion framing our world and commanding our day before university lectures begin."
+      }
+    ],
+    "global": [
+      {
+        "id": "glob-1",
+        "tag": "Quarterly Summit",
+        "title": "Healing Streams Live",
+        "time": "Every 4 Months",
+        "description": "Global healing services with Pastor Chris, broadcasting to billions around the world."
+      },
+      {
+        "id": "glob-2",
+        "tag": "Global Warfare",
+        "title": "Global Day of Prayer",
+        "time": "Special Broadcasts",
+        "description": "Unbroken 24-hour global prayer altering policies and empowering nations in truth."
+      },
+      {
+        "id": "glob-3",
+        "tag": "Prophetic Unveiling",
+        "title": "Your LoveWorld Specials",
+        "time": "Multi-Season Series",
+        "description": "Deep prophetic insight into current global events through the lens of God's Word."
+      },
+      {
+        "id": "glob-4",
+        "tag": "Global Literature",
+        "title": "Reach Out World (ROW)",
+        "time": "Continuous Crusade",
+        "description": "Saturating colleges with Rhapsody of Realities in all languages and formats."
+      }
+    ]
+  },
+  "quotesSection": {
+    "tag": "",
+    "title": "Words from the Man of God",
+    "subtitle": "Foundational doctrines by Rev. (Dr.) Chris Oyakhilome DSc. DSc. DD.",
+    "quotes": [
+      {
+        "id": "quote-1",
+        "text": "If you act your faith, you may look foolish for five minutes; but if you don't act your faith, you may be foolish forever.",
+        "author": "Pastor Chris Oyakhilome",
+        "authorRole": "President, Believers' LoveWorld Inc."
+      },
+      {
+        "id": "quote-2",
+        "text": "Success is impacting the world with the investment of your personality. Find a need and reach it; find a hurt and heal it.",
+        "author": "Pastor Chris Oyakhilome",
+        "authorRole": "President, Believers' LoveWorld Inc."
+      },
+      {
+        "id": "quote-3",
+        "text": "The Word of God is your life. Feed on it daily, meditate upon it, and you will make your way prosperous with good success.",
+        "author": "Pastor Chris Oyakhilome",
+        "authorRole": "President, Believers' LoveWorld Inc."
+      }
+    ]
+  },
+  "campusesSection": {
+    "tag": "",
+    "title": "Campus Fellowship Portal",
+    "description": "Select your university from the list below to access specific fellowship venue, meeting times, campus coordinator, and direct WhatsApp connect."
+  },
+  "campuses": {
+    "udsm": {
+      "name": "University of Dar es Salaam (UDSM)",
+      "city": "Dar es Salaam (Mlimani Campus)",
+      "tag": "Main Campus & Branches Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:30 AM",
+      "venue": "Main Lecture Theater 2 (MLT 2) / Student Center Arena",
+      "coordinator": "Campus Pastor — BLW UDSM Chapter",
+      "phone": "+255673780973"
+    },
+    "udom": {
+      "name": "University of Dodoma (UDOM)",
+      "city": "Dodoma (Capital City)",
+      "tag": "Capital City Grand Chapter",
+      "midweek": "Wednesdays: 5:30 PM - 7:15 PM",
+      "sunday": "Sundays: 9:30 AM - 12:00 PM",
+      "venue": "College of Humanities / Central Assembly Amphitheater",
+      "coordinator": "Campus Pastor — BLW UDOM Chapter",
+      "phone": "+255719048348"
+    },
+    "kiu": {
+      "name": "Kampala International University (KIU)",
+      "city": "Dar es Salaam (Gongo la Mboto)",
+      "tag": "KIU Campus Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:30 AM",
+      "venue": "Main Fellowship Auditorium, Student Complex",
+      "coordinator": "Campus Fellowship Coordinator",
+      "phone": "+255623380416"
+    },
+    "muhas": {
+      "name": "Muhimbili University of Health & Allied Sciences (MUHAS)",
+      "city": "Dar es Salaam (Upanga)",
+      "tag": "Medical Sciences Chapter",
+      "midweek": "Wednesdays: 6:00 PM - 7:30 PM",
+      "sunday": "Sundays: 8:30 AM - 10:45 AM",
+      "venue": "Medical Lecture Hall B / Student Hostel Fellowship Hall",
+      "coordinator": "Campus Coordinator — MUHAS",
+      "phone": "+255763014070"
+    },
+    "dit": {
+      "name": "Dar es Salaam Institute of Technology (DIT)",
+      "city": "Dar es Salaam (Posta)",
+      "tag": "Engineering Hub Chapter",
+      "midweek": "Thursdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:00 AM",
+      "venue": "Technology Block A, Main Assembly Hall",
+      "coordinator": "Campus Fellowship Leader — DIT",
+      "phone": "+255763014070"
+    },
+    "sua": {
+      "name": "Sokoine University of Agriculture (SUA)",
+      "city": "Morogoro",
+      "tag": "SUA Main & Mazimbu Campuses",
+      "midweek": "Wednesdays: 5:30 PM - 7:15 PM",
+      "sunday": "Sundays: 9:00 AM - 11:30 AM",
+      "venue": "Mazimbu Assembly Hall / Main Campus Pavilion",
+      "coordinator": "Campus Pastor — BLW SUA Chapter",
+      "phone": "+255772122967"
+    },
+    "must": {
+      "name": "Mbeya University of Science & Technology (MUST)",
+      "city": "Mbeya (Iyunga)",
+      "tag": "MUST Tech Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:30 AM",
+      "venue": "Engineering Auditorium 1",
+      "coordinator": "Campus Fellowship Coordinator",
+      "phone": "+255772122967"
+    },
+    "ardhi": {
+      "name": "Ardhi University",
+      "city": "Dar es Salaam (Observation Hill)",
+      "tag": "Survey & Architecture Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 6:45 PM",
+      "sunday": "Sundays: 9:00 AM - 11:00 AM",
+      "venue": "School of Architecture Hall 3",
+      "coordinator": "Campus Coordinator — Ardhi",
+      "phone": "+255783784633"
+    },
+    "stjohns": {
+      "name": "St. John's University of Tanzania",
+      "city": "Dodoma",
+      "tag": "St. John’s Chapter",
+      "midweek": "Wednesdays: 5:30 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:15 AM",
+      "venue": "Campus Assembly Hall",
+      "coordinator": "Campus Fellowship Leader",
+      "phone": "+255719048348"
+    },
+    "kairuki": {
+      "name": "Hubert Kairuki Memorial University (HKMU)",
+      "city": "Dar es Salaam (Mikocheni)",
+      "tag": "Health & Clinical Chapter",
+      "midweek": "Wednesdays: 6:00 PM - 7:30 PM",
+      "sunday": "Sundays: 9:00 AM - 11:00 AM",
+      "venue": "Clinical Skills Lab Conference Center",
+      "coordinator": "Campus Coordinator",
+      "phone": "+255769268941"
+    },
+    "stjoseph": {
+      "name": "St. Joseph University in Tanzania (SJUIT)",
+      "city": "Dar es Salaam (Boko / Mbezi)",
+      "tag": "SJUIT Chapter",
+      "midweek": "Thursdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:30 AM",
+      "venue": "Block D, Engineering Wing Auditorium",
+      "coordinator": "Campus Coordinator",
+      "phone": "+255684350109"
+    },
+    "tia": {
+      "name": "Tanzania Institute of Accountancy (TIA)",
+      "city": "Dar es Salaam (Kurasini)",
+      "tag": "TIA Finance Chapter",
+      "midweek": "Wednesdays: 4:45 PM - 6:45 PM",
+      "sunday": "Sundays: 9:00 AM - 11:00 AM",
+      "venue": "Accountancy Lecture Hall 4",
+      "coordinator": "Campus Coordinator — TIA",
+      "phone": "+255625269461"
+    },
+    "ifm": {
+      "name": "Institute of Finance Management (IFM)",
+      "city": "Dar es Salaam (City Center)",
+      "tag": "IFM Banking Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:15 AM",
+      "venue": "Tower Lecture Hall 1",
+      "coordinator": "Campus Coordinator — IFM",
+      "phone": "+255772122967"
+    },
+    "cbe": {
+      "name": "College of Business Education (CBE)",
+      "city": "Dar es Salaam (Bibi Titi)",
+      "tag": "CBE Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:00 AM",
+      "venue": "Postgraduate Block Assembly Room",
+      "coordinator": "Campus Coordinator — CBE",
+      "phone": "+255772122967"
+    },
+    "jordan": {
+      "name": "Jordan University College",
+      "city": "Morogoro",
+      "tag": "Jordan Campus Chapter",
+      "midweek": "Wednesdays: 5:15 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:30 AM",
+      "venue": "Arts & Social Sciences Hall",
+      "coordinator": "Campus Coordinator",
+      "phone": "+255772122967"
+    },
+    "rucu": {
+      "name": "Ruaha Catholic University (RUCU)",
+      "city": "Iringa",
+      "tag": "RUCU Chapter",
+      "midweek": "Wednesdays: 5:30 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:15 AM",
+      "venue": "Campus Lecture Complex",
+      "coordinator": "Campus Coordinator",
+      "phone": "+255772122967"
+    },
+    "tudarco": {
+      "name": "Tumaini University Dar es Salaam College (TUDARCo)",
+      "city": "Dar es Salaam (Mwenge)",
+      "tag": "TUDARCo Chapter",
+      "midweek": "Wednesdays: 5:00 PM - 7:00 PM",
+      "sunday": "Sundays: 9:00 AM - 11:00 AM",
+      "venue": "Mwenge Campus Hall 2",
+      "coordinator": "Campus Coordinator",
+      "phone": "+255772122967"
+    }
+  },
+  "settings": {
+    "ministryName": "BLW CAMPUS MINISTRY",
+    "zoneName": "TANZANIA ZONE",
+    "footerDescription": "A vibrant arm of Believers' Loveworld Inc., taking God's Word to all higher learning institutions across Tanzania.",
+    "motto": "Building a happier world with love",
+    "phone": "0772 122 967",
+    "phoneDial": "tel:0772122967",
+    "whatsapp": "+255 772 122 967",
+    "whatsappLink": "https://wa.me/255772122967",
+    "floatingPhone": "+255 673 780 973",
+    "floatingWhatsappLink": "https://wa.me/255673780973?text=Hi%20BLW%20Campus%20Ministry%20Tanzania%20Zone,%20I%20would%20like%20to%20connect.",
+    "instagram": "blwtanzaniazone",
+    "instagramUrl": "https://instagram.com/blwtanzaniazone",
+    "email": "blwtanzaniazone@gmail.com",
+    "location": "Dar es Salaam, Tanzania",
+    "defaultStudentPin": "BLW2026",
+    "copyright": "© 2026 BLW Campus Ministry — Tanzania Zone. All Rights Reserved."
+  }
+}

@@ -1,0 +1,2878 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLW Campus Ministry — Tanzania Zone | Administrative Studio</title>
+    <link rel="icon" type="image/png" href="gallery/blw logo.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: {
+                            950: '#07080d',
+                            900: '#0d0f17',
+                            850: '#121524',
+                            800: '#171c2e',
+                            700: '#222942'
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        *, body, h1, h2, h3, h4, h5, h6, p, button, input, select, textarea, span, div, a {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+        body {
+            background-color: #07080d;
+            color: #e4e4e7;
+        }
+        .glass-panel {
+            background: rgba(13, 15, 23, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(18, 21, 36, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #07080d; }
+        ::-webkit-scrollbar-thumb { background: #f59e0b; border-radius: 999px; }
+    </style>
+</head>
+<body class="min-h-screen bg-obsidian-950 flex flex-col selection:bg-amber-500 selection:text-obsidian-950">
+
+    <!-- Toast Notification Wrapper -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+    <!-- ======================================================== -->
+    <!-- 1. AUTHENTICATION GATEWAY (LOGIN OVERLAY)                -->
+    <!-- ======================================================== -->
+    <div id="admin-login-overlay" style="display: flex;" class="fixed inset-0 z-50 bg-obsidian-950/95 backdrop-blur-2xl flex items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-8 sm:p-10 max-w-md w-full border border-amber-500/30 shadow-2xl relative text-center">
+            <div class="absolute -top-20 -right-20 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="w-20 h-20 mx-auto mb-4 relative flex items-center justify-center">
+                <img src="gallery/blw logo.png" alt="BLW Emblem" class="w-full h-full object-contain filter drop-shadow-[0_2px_12px_rgba(245,158,11,0.4)]">
+            </div>
+
+            <h2 class="text-2xl font-black text-white">Administrative Studio</h2>
+            <p class="text-xs text-amber-400 font-semibold tracking-wider uppercase mt-1">BLW Campus Ministry — Tanzania Zone</p>
+            <p class="text-xs text-zinc-400 mt-2">Manage every single word, section, and component of the public website.</p>
+
+            <form onsubmit="handleLogin(event)" class="mt-8 space-y-4">
+                <div class="space-y-1.5 text-left">
+                    <label for="login-pin" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400">Admin Passcode / PIN</label>
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="login-pin" 
+                            required
+                            placeholder="Enter Admin PIN (Default: BLW2026)" 
+                            class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3.5 px-4 text-sm font-semibold text-white placeholder-zinc-500 focus:outline-none transition">
+                        <button type="button" onclick="togglePasswordVisibility('login-pin')" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white text-xs">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-obsidian-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i>
+                    <span>Unlock Admin Studio</span>
+                </button>
+                
+                <p class="text-[11px] text-zinc-500 pt-1">Default PIN: <span class="font-mono text-amber-400 font-bold">BLW2026</span> &bull; Client-side studio lock</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- 2. MAIN ADMIN SHELL                                      -->
+    <!-- ======================================================== -->
+    <div id="admin-app" style="display: none;" class="flex-1 flex flex-col min-h-screen">
+        
+        <!-- Top Navigation Bar -->
+        <header class="border-b border-white/10 bg-obsidian-900/80 backdrop-blur sticky top-0 z-40 px-5 sm:px-8 py-3.5">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                
+                <!-- Brand Title -->
+                <div class="flex items-center gap-3">
+                    <img src="gallery/blw logo.png" alt="BLW Emblem" class="w-10 h-10 object-contain">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-base sm:text-lg font-black text-white leading-tight">BLW Admin Studio</h1>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">Total CMS Control</span>
+                        </div>
+                        <p class="text-[11px] text-zinc-400">Edit every single word, section, image &amp; component</p>
+                    </div>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex items-center gap-3">
+                    <a href="blw_campus_ministry_tanzania_zone.html" target="_blank" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-zinc-200 flex items-center gap-1.5 transition">
+                        <span>View Live Site</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-amber-400"></i>
+                    </a>
+
+                    <button onclick="saveAndPublishData()" id="publish-btn" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 flex items-center gap-2 transition hover:scale-[1.02]">
+                        <i data-lucide="cloud-upload" class="w-4 h-4"></i>
+                        <span>Publish Changes</span>
+                    </button>
+
+                    <button onclick="handleLogout()" title="Sign Out" class="p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/30 text-zinc-400 hover:text-red-400 transition">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs Bar -->
+        <nav class="border-b border-white/5 bg-obsidian-950/60 px-5 sm:px-8 overflow-x-auto">
+            <div class="max-w-7xl mx-auto flex items-center gap-2 py-2.5 whitespace-nowrap">
+                <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-amber-500 text-obsidian-950">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>Overview</span>
+                </button>
+                <button onclick="switchTab('hero')" id="tab-btn-hero" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>Hero &amp; Headlines</span>
+                </button>
+                <button onclick="switchTab('moments')" id="tab-btn-moments" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="image" class="w-4 h-4"></i>
+                    <span>Moments &amp; Events</span>
+                </button>
+                <button onclick="switchTab('mandate')" id="tab-btn-mandate" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    <span>Our Mandate (Blueprint)</span>
+                </button>
+                <button onclick="switchTab('leadership')" id="tab-btn-leadership" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    <span>Leadership</span>
+                </button>
+                <button onclick="switchTab('principles')" id="tab-btn-principles" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>3 Core Principles</span>
+                </button>
+                <button onclick="switchTab('programs')" id="tab-btn-programs" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span>Services &amp; Summits</span>
+                </button>
+                <button onclick="switchTab('quotes')" id="tab-btn-quotes" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="quote" class="w-4 h-4"></i>
+                    <span>Prophetic Words</span>
+                </button>
+                <button onclick="switchTab('campuses')" id="tab-btn-campuses" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+                    <span>Campus Chapters</span>
+                </button>
+                <button onclick="switchTab('settings')" id="tab-btn-settings" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <span>Contacts &amp; Footer</span>
+                </button>
+                <button onclick="switchTab('backup')" id="tab-btn-backup" class="tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-zinc-400 hover:text-white hover:bg-white/5">
+                    <i data-lucide="database" class="w-4 h-4"></i>
+                    <span>Backup &amp; Sync</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Body Content Area -->
+        <main class="flex-1 max-w-7xl w-full mx-auto p-5 sm:p-8 space-y-8">
+            
+            <!-- ============================================== -->
+            <!-- TAB 1: OVERVIEW DASHBOARD                     -->
+            <!-- ============================================== -->
+            <section id="tab-overview" class="tab-pane space-y-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="glass-panel p-6 rounded-3xl border border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-wider text-amber-400 block mb-1">Campus Chapters</span>
+                            <span id="stat-campus-count" class="text-3xl sm:text-4xl font-black text-white">17</span>
+                            <span class="text-[11px] text-zinc-400 block mt-1">Across Tanzania Zone</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">
+                            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-3xl border border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-wider text-amber-400 block mb-1">Moments &amp; Events</span>
+                            <span id="stat-moments-count" class="text-3xl sm:text-4xl font-black text-white">4</span>
+                            <span class="text-[11px] text-zinc-400 block mt-1">Crusades, Streams &amp; Outreaches</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">
+                            <i data-lucide="camera" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-3xl border border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-wider text-amber-400 block mb-1">Zonal Phone</span>
+                            <span id="stat-phone-display" class="text-lg sm:text-xl font-black text-white font-mono">0772 122 967</span>
+                            <span class="text-[11px] text-zinc-400 block mt-1">Direct Call &amp; Fast Connect</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">
+                            <i data-lucide="phone" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-3xl border border-white/10 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase font-bold tracking-wider text-amber-400 block mb-1">Official Instagram</span>
+                            <span id="stat-instagram-display" class="text-sm sm:text-base font-black text-white">@blwtanzaniazone</span>
+                            <span class="text-[11px] text-zinc-400 block mt-1">Broadcasts &amp; Outreaches</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center">
+                            <i data-lucide="instagram" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Editors Navigation Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <button onclick="switchTab('hero')" class="p-6 rounded-3xl glass-panel text-left hover:border-amber-500/40 transition group">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-white text-base">Hero &amp; Headlines</h4>
+                        <p class="text-xs text-zinc-400 mt-1">Edit main titles, mottos, stats bar metrics, Pastor Chris portrait.</p>
+                    </button>
+                    <button onclick="switchTab('moments')" class="p-6 rounded-3xl glass-panel text-left hover:border-amber-500/40 transition group">
+                        <i data-lucide="image" class="w-6 h-6 text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-white text-base">Moments &amp; Events</h4>
+                        <p class="text-xs text-zinc-400 mt-1">Publish, edit, or remove crusades, healing programs &amp; conferences.</p>
+                    </button>
+                    <button onclick="switchTab('mandate')" class="p-6 rounded-3xl glass-panel text-left hover:border-amber-500/40 transition group">
+                        <i data-lucide="compass" class="w-6 h-6 text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-white text-base">Our Mandate</h4>
+                        <p class="text-xs text-zinc-400 mt-1">Edit Vision, Mission, Purpose, and foundational motto texts.</p>
+                    </button>
+                    <button onclick="switchTab('leadership')" class="p-6 rounded-3xl glass-panel text-left hover:border-amber-500/40 transition group">
+                        <i data-lucide="users" class="w-6 h-6 text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-white text-base">Ministry Leadership</h4>
+                        <p class="text-xs text-zinc-400 mt-1">Manage Regional &amp; Zonal Secretary profiles, bios, and portraits.</p>
+                    </button>
+                    <button onclick="switchTab('principles')" class="p-6 rounded-3xl glass-panel text-left hover:border-amber-500/40 transition group">
+                        <i data-lucide="award" class="w-6 h-6 text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-white text-base">3 Core Principles</h4>
+                        <p class="text-xs text-zinc-400 mt-1">Edit Exceptionalism, Expansionism, and Perfectionism doctrines.</p>
+                    </button>
+                    <button onclick="switchTab('campuses')" class="p-6 rounded-3xl glass-panel text-left hover:border-amber-500/40 transition group">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-white text-base">Campus Chapters</h4>
+                        <p class="text-xs text-zinc-400 mt-1">Update meeting halls, service times, and coordinators for 17+ unis.</p>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 2: HERO & BRANDING EDITOR                 -->
+            <!-- ============================================== -->
+                        <section id="tab-hero" class="tab-pane hidden space-y-6">
+                <div class="pb-4 border-b border-white/10">
+                    <h2 class="text-2xl font-black text-white">Hero &amp; Branding Editor</h2>
+                    <p class="text-xs text-zinc-400 mt-0.5">Customize headlines, subheadings, mottos, stats bar, and Pastor Chris portrait. Use <strong>Delete Box</strong> to completely hide any text block from the live site.</p>
+                </div>
+
+                <form onsubmit="handleSaveHero(event)" class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 space-y-6 max-w-4xl">
+                    <div class="space-y-4 pb-4 border-b border-white/10">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 border-b border-white/5 pb-2">Brand &amp; Navbar Identity</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="text-xs text-zinc-400 font-semibold">Navbar Title</label>
+                                <input type="text" id="brand-nav-title" placeholder="BLW CAMPUS" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white font-bold">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-xs text-zinc-400 font-semibold">Navbar Tag</label>
+                                <input type="text" id="brand-nav-tag" placeholder="TZ ZONE" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-xs text-zinc-400 font-semibold">Navbar Subtitle</label>
+                                <input type="text" id="brand-nav-subtitle" placeholder="Believers' Loveworld Inc." class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-xs text-zinc-400 font-semibold">Logo Image Path / URL</label>
+                                <input type="text" id="brand-logo-url" placeholder="gallery/blw logo.png" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400 border-b border-white/5 pb-2">Main Headline &amp; Tagline</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Hero Pill Tag</span>
+                <span id="badge-del-hero-pill-tag" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-pill-tag" onclick="deleteTextBox('hero-pill-tag')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-pill-tag" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Hero Pill Subtitle</span>
+                <span id="badge-del-hero-pill-sub" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-pill-sub" onclick="deleteTextBox('hero-pill-sub')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-pill-sub" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Headline Line 1 (White)</span>
+                <span id="badge-del-hero-head-prefix" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-head-prefix" onclick="deleteTextBox('hero-head-prefix')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-head-prefix" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Headline Line 2 (Gold Highlight)</span>
+                <span id="badge-del-hero-head-highlight" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-head-highlight" onclick="deleteTextBox('hero-head-highlight')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-head-highlight" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white font-bold">
+    </div>
+                        </div>
+
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Hero Subtitle / Description Paragraph</span>
+                <span id="badge-del-hero-desc" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-desc" onclick="deleteTextBox('hero-desc')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <textarea id="hero-desc" rows="3" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white "></textarea>
+    </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Motto 1 (Amber)</span>
+                <span id="badge-del-hero-motto1" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-motto1" onclick="deleteTextBox('hero-motto1')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-motto1" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Motto 2 (Gold / Zinc)</span>
+                <span id="badge-del-hero-motto2" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-motto2" onclick="deleteTextBox('hero-motto2')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-motto2" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Primary Button Text (CTA 1)</span>
+                <span id="badge-del-hero-cta1" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-cta1" onclick="deleteTextBox('hero-cta1')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-cta1" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Secondary Button Text (CTA 2)</span>
+                <span id="badge-del-hero-cta2" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-cta2" onclick="deleteTextBox('hero-cta2')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-cta2" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        </div>
+                    </div>
+
+                    <!-- Pastor Chris Portrait -->
+                    <div id="admin-pc-box" class="space-y-4 pt-4 border-t border-white/10">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Hero Spotlight: Pastor Chris Oyakhilome</h3>
+                                <p class="text-[11px] text-zinc-400">Manage or completely remove the right-hand spotlight portrait</p>
+                            </div>
+                            <button type="button" id="btn-toggle-pc-card" onclick="togglePastorChrisSpotlight()" class="px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold flex items-center gap-1.5 transition">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                <span id="lbl-toggle-pc-card">Delete Card Completely</span>
+                            </button>
+                        </div>
+                        <div id="pc-fields-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Spotlight Portrait URL</span>
+                <span id="badge-del-hero-pc-img" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-pc-img" onclick="deleteTextBox('hero-pc-img')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-pc-img" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Badge Label</span>
+                <span id="badge-del-hero-pc-badge" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-pc-badge" onclick="deleteTextBox('hero-pc-badge')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-pc-badge" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Full Name & Degrees</span>
+                <span id="badge-del-hero-pc-name" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-pc-name" onclick="deleteTextBox('hero-pc-name')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-pc-name" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white font-bold">
+    </div>
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Ministry Role / Office</span>
+                <span id="badge-del-hero-pc-role" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-hero-pc-role" onclick="deleteTextBox('hero-pc-role')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="hero-pc-role" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Bar Metrics -->
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Quick Stats Metrics Bar</h3>
+                                <p class="text-[11px] text-zinc-400">Delete any stat box completely or add new metrics</p>
+                            </div>
+                            <button type="button" onclick="addStatBox()" class="px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Add Stat Metric</span>
+                            </button>
+                        </div>
+                        <div id="stats-admin-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex justify-end">
+                        <button type="submit" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save Hero &amp; Headlines</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 3: MOMENTS & EVENTS MANAGER               -->
+            <!-- ============================================== -->
+            <section id="tab-moments" class="tab-pane hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                    <div>
+                        <h2 class="text-2xl font-black text-white">Moments &amp; Events Gallery</h2>
+                        <p class="text-xs text-zinc-400 mt-0.5">Manage crusades, healing streams, youth conferences, and outreach archives</p>
+                    </div>
+
+                    <button onclick="openAddMomentModal()" class="px-5 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider shadow-lg flex items-center gap-2 transition hover:scale-[1.02]">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Add New Event</span>
+                    </button>
+                </div>
+
+                <!-- Section Header Texts Editor -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-amber-400">Section Header Content</span>
+                        <button type="button" onclick="saveMomentsHeader()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            <span>Save Header</span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Tag</label>
+                            <input type="text" id="moments-sec-tag" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Title</label>
+                            <input type="text" id="moments-sec-title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Badge Text</label>
+                            <input type="text" id="moments-sec-badge" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                        <div class="sm:col-span-3">
+                            <label class="text-[11px] text-zinc-400 block mb-1">Description</label>
+                            <input type="text" id="moments-sec-desc" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Cards List -->
+                <div id="moments-admin-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 4: OUR MANDATE (BLUEPRINT)                -->
+            <!-- ============================================== -->
+                        <section id="tab-mandate" class="tab-pane hidden space-y-6">
+                <div class="pb-4 border-b border-white/10">
+                    <h2 class="text-2xl font-black text-white">Our Mandate &amp; Core Compass</h2>
+                    <p class="text-xs text-zinc-400 mt-0.5">Edit Vision, Mission, and Purpose foundational blueprint texts or delete any card completely</p>
+                </div>
+
+                <form onsubmit="handleSaveMandate(event)" class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 space-y-6 max-w-4xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Tag</span>
+                <span id="badge-del-mandate-sec-tag" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-mandate-sec-tag" onclick="deleteTextBox('mandate-sec-tag')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="mandate-sec-tag" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Title</span>
+                <span id="badge-del-mandate-sec-title" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-mandate-sec-title" onclick="deleteTextBox('mandate-sec-title')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="mandate-sec-title" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white font-bold">
+    </div>
+                    </div>
+
+                    <!-- Dynamic Cards Container -->
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Blueprint Cards</h3>
+                                <p class="text-[11px] text-zinc-400">Delete any card or text box completely</p>
+                            </div>
+                            <button type="button" onclick="addMandateCard()" class="px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Add Card</span>
+                            </button>
+                        </div>
+                        <div id="mandate-cards-admin-list" class="space-y-4"></div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex justify-end">
+                        <button type="submit" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save Mandate Blueprint</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 5: LEADERSHIP MANAGEMENT                  -->
+            <!-- ============================================== -->
+            <section id="tab-leadership" class="tab-pane hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                    <div>
+                        <h2 class="text-2xl font-black text-white">Ministry Leadership</h2>
+                        <p class="text-xs text-zinc-400 mt-0.5">Manage pastoral leadership profiles, titles, regions, and bios</p>
+                    </div>
+
+                    <button onclick="openAddLeaderModal()" class="px-5 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider shadow-lg flex items-center gap-2 transition hover:scale-[1.02]">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i>
+                        <span>Add Leader</span>
+                    </button>
+                </div>
+
+                <!-- Leadership Section Header Texts -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-amber-400">Section Header Content</span>
+                        <button type="button" onclick="saveLeadershipHeader()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            <span>Save Header</span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Tag</label>
+                            <input type="text" id="leadership-sec-tag" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Title</label>
+                            <input type="text" id="leadership-sec-title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-[11px] text-zinc-400 block mb-1">Description</label>
+                            <input type="text" id="leadership-sec-desc" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="leadership-admin-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 6: THREE CORE PRINCIPLES                  -->
+            <!-- ============================================== -->
+                        <section id="tab-principles" class="tab-pane hidden space-y-6">
+                <div class="pb-4 border-b border-white/10">
+                    <h2 class="text-2xl font-black text-white">The Three Core Principles</h2>
+                    <p class="text-xs text-zinc-400 mt-0.5">Edit Exceptionalism, Expansionism, and Perfectionism doctrines or delete any doctrine card completely</p>
+                </div>
+
+                <form onsubmit="handleSavePrinciples(event)" class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 space-y-6 max-w-4xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Tag</span>
+                <span id="badge-del-principles-sec-tag" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-principles-sec-tag" onclick="deleteTextBox('principles-sec-tag')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="principles-sec-tag" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Title</span>
+                <span id="badge-del-principles-sec-title" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-principles-sec-title" onclick="deleteTextBox('principles-sec-title')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="principles-sec-title" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white font-bold">
+    </div>
+                        <div class="sm:col-span-2">
+                            
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Description</span>
+                <span id="badge-del-principles-sec-desc" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-principles-sec-desc" onclick="deleteTextBox('principles-sec-desc')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="principles-sec-desc" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Principles Container -->
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Core Principle Cards</h3>
+                                <p class="text-[11px] text-zinc-400">Delete any principle card completely</p>
+                            </div>
+                            <button type="button" onclick="addPrincipleCard()" class="px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Add Principle</span>
+                            </button>
+                        </div>
+                        <div id="principles-cards-admin-list" class="space-y-4"></div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex justify-end">
+                        <button type="submit" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save Principles</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 7: FELLOWSHIP SERVICES & SUMMITS          -->
+            <!-- ============================================== -->
+                        <section id="tab-programs" class="tab-pane hidden space-y-6">
+                <div class="pb-4 border-b border-white/10">
+                    <h2 class="text-2xl font-black text-white">Fellowship Services &amp; Summits</h2>
+                    <p class="text-xs text-zinc-400 mt-0.5">Manage weekly schedule and global Pastor Chris summits or delete any service/summit completely</p>
+                </div>
+
+                <form onsubmit="handleSavePrograms(event)" class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 space-y-6 max-w-4xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Tag</span>
+                <span id="badge-del-programs-sec-tag" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-programs-sec-tag" onclick="deleteTextBox('programs-sec-tag')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="programs-sec-tag" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Section Title</span>
+                <span id="badge-del-programs-sec-title" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-programs-sec-title" onclick="deleteTextBox('programs-sec-title')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="programs-sec-title" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white font-bold">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Tab 1 Label (Weekly Services)</span>
+                <span id="badge-del-programs-tab-weekly" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-programs-tab-weekly" onclick="deleteTextBox('programs-tab-weekly')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="programs-tab-weekly" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Tab 2 Label (Global Programs)</span>
+                <span id="badge-del-programs-tab-global" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-programs-tab-global" onclick="deleteTextBox('programs-tab-global')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="programs-tab-global" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                    </div>
+
+                    <!-- Weekly Services -->
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-amber-400">Campus Weekly Services</h3>
+                                <p class="text-[11px] text-zinc-400">Delete any service box or add new services</p>
+                            </div>
+                            <button type="button" onclick="addWeeklyService()" class="px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Add Service</span>
+                            </button>
+                        </div>
+                        <div id="weekly-services-admin-list" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Global Programs -->
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                            <div>
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-violet-400">Global Summits with Pastor Chris</h3>
+                                <p class="text-[11px] text-zinc-400">Delete any program box or add new ones</p>
+                            </div>
+                            <button type="button" onclick="addGlobalProgram()" class="px-3 py-1.5 rounded-xl bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 text-xs font-bold flex items-center gap-1.5 transition">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                <span>Add Program</span>
+                            </button>
+                        </div>
+                        <div id="global-programs-admin-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex justify-end">
+                        <button type="submit" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save Fellowship Services</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 8: PROPHETIC WORDS (QUOTES VAULT)         -->
+            <!-- ============================================== -->
+            <section id="tab-quotes" class="tab-pane hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                    <div>
+                        <h2 class="text-2xl font-black text-white">Prophetic Teachings (Quote Vault)</h2>
+                        <p class="text-xs text-zinc-400 mt-0.5">Foundational doctrines by Rev. (Dr.) Chris Oyakhilome DSc. DSc. DD.</p>
+                    </div>
+                    <button onclick="openAddQuoteModal()" class="px-5 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider shadow-lg flex items-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Add Quote</span>
+                    </button>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-amber-400">Section Header Content</span>
+                        <button type="button" onclick="saveQuotesHeader()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            <span>Save Header</span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Tag</label>
+                            <input type="text" id="quotes-sec-tag" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Title</label>
+                            <input type="text" id="quotes-sec-title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-[11px] text-zinc-400 block mb-1">Subtitle</label>
+                            <input type="text" id="quotes-sec-sub" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="quotes-admin-grid" class="space-y-4"></div>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 9: CAMPUS CHAPTERS DIRECTORY              -->
+            <!-- ============================================== -->
+            <section id="tab-campuses" class="tab-pane hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                    <div>
+                        <h2 class="text-2xl font-black text-white">Campus Fellowship Chapters</h2>
+                        <p class="text-xs text-zinc-400 mt-0.5">Directory of higher learning institutions across Tanzania Zone</p>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="relative w-64">
+                            <input 
+                                type="text" 
+                                id="campus-search-box" 
+                                oninput="filterCampusesList()" 
+                                placeholder="Search university or city..." 
+                                class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl py-2 pl-9 pr-3 text-xs text-white placeholder-zinc-500 focus:outline-none transition">
+                            <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                        </div>
+
+                        <button onclick="openAddCampusModal()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Add Campus</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section Header Content -->
+                <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase text-amber-400">Section Header Content</span>
+                        <button type="button" onclick="saveQuotesHeader()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition">
+                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            <span>Save Header</span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Tag</label>
+                            <input type="text" id="campuses-sec-tag" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-zinc-400 block mb-1">Title</label>
+                            <input type="text" id="campuses-sec-title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-[11px] text-zinc-400 block mb-1">Description</label>
+                            <input type="text" id="campuses-sec-desc" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campuses Table -->
+                <div class="glass-panel rounded-3xl overflow-hidden border border-white/10">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-obsidian-900/90 text-zinc-400 font-semibold uppercase tracking-wider border-b border-white/10">
+                                <tr>
+                                    <th class="py-4 px-6">University &amp; City</th>
+                                    <th class="py-4 px-6">Service Schedules</th>
+                                    <th class="py-4 px-6">Campus Venue</th>
+                                    <th class="py-4 px-6">Coordinator Contact</th>
+                                    <th class="py-4 px-6 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="campuses-table-body" class="divide-y divide-white/5 text-zinc-300"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 10: GENERAL SETTINGS & CONTACTS           -->
+            <!-- ============================================== -->
+                        <section id="tab-settings" class="tab-pane hidden space-y-6">
+                <div class="pb-4 border-b border-white/10">
+                    <h2 class="text-2xl font-black text-white">Portal &amp; Contact Settings</h2>
+                    <p class="text-xs text-zinc-400 mt-0.5">Manage phone numbers, WhatsApp lines, Instagram, footer texts, and student access keys. Use Delete Box to remove any contact completely from the site.</p>
+                </div>
+
+                <form onsubmit="handleSaveSettings(event)" class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 space-y-6 max-w-4xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Official Phone Number</span>
+                <span id="badge-del-setting-phone" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-phone" onclick="deleteTextBox('setting-phone')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-phone" placeholder="e.g. 0772 122 967" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>WhatsApp Direct Line</span>
+                <span id="badge-del-setting-whatsapp" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-whatsapp" onclick="deleteTextBox('setting-whatsapp')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-whatsapp" placeholder="e.g. +255 772 122 967" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Floating WhatsApp Hotline</span>
+                <span id="badge-del-setting-floating-phone" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-floating-phone" onclick="deleteTextBox('setting-floating-phone')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-floating-phone" placeholder="e.g. +255 673 780 973" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Instagram Handle</span>
+                <span id="badge-del-setting-instagram" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-instagram" onclick="deleteTextBox('setting-instagram')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-instagram" placeholder="e.g. blwtanzaniazone" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Official Ministry Email</span>
+                <span id="badge-del-setting-email" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-email" onclick="deleteTextBox('setting-email')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-email" placeholder="e.g. blwtanzaniazone@gmail.com" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Physical / Regional Location</span>
+                <span id="badge-del-setting-location" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-location" onclick="deleteTextBox('setting-location')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-location" placeholder="e.g. Dar es Salaam, Tanzania" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Student Portal Default Passcode</span>
+                <span id="badge-del-setting-student-pin" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-student-pin" onclick="deleteTextBox('setting-student-pin')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-student-pin" placeholder="Default: BLW2026" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Official Ministry Motto</span>
+                <span id="badge-del-setting-motto" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-motto" onclick="deleteTextBox('setting-motto')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-motto" placeholder="e.g. Building a happier world with love" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Footer Brief Description</span>
+                <span id="badge-del-setting-footer-desc" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-footer-desc" onclick="deleteTextBox('setting-footer-desc')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <textarea id="setting-footer-desc" rows="2" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white "></textarea>
+    </div>
+                        
+    <div class="space-y-1.5">
+        <div class="flex items-center justify-between">
+            <label class="text-xs text-zinc-400 font-semibold flex items-center gap-2">
+                <span>Copyright Notice Line</span>
+                <span id="badge-del-setting-copyright" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30 uppercase">Deleted</span>
+            </label>
+            <button type="button" id="btn-del-setting-copyright" onclick="deleteTextBox('setting-copyright')" class="text-[11px] text-zinc-400 hover:text-red-400 flex items-center gap-1 font-mono transition" title="Delete this text box completely">
+                <i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i>
+                <span>Delete Box</span>
+            </button>
+        </div>
+        <input type="text" id="setting-copyright" placeholder="" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white ">
+    </div>
+
+    <div class="space-y-1.5">
+        <label class="text-xs text-zinc-400 font-semibold block">Change Admin Studio PIN (Optional)</label>
+        <input type="password" id="setting-admin-pin" placeholder="Leave blank to keep current PIN (Default: BLW2026)" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-xl p-3 text-xs text-white">
+    </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex justify-end">
+                        <button type="submit" class="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save Contact Settings</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- TAB 11: BACKUP & DATA SYNCHRONIZATION         -->
+            <!-- ============================================== -->
+            <section id="tab-backup" class="tab-pane hidden space-y-6">
+                <div class="pb-4 border-b border-white/10">
+                    <h2 class="text-2xl font-black text-white">Data Synchronization &amp; Backups</h2>
+                    <p class="text-xs text-zinc-400 mt-0.5">Export backups, download an updated <code>blw-data.json</code> for static hosting, import configurations, or reset to defaults</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel rounded-3xl p-6 border border-white/10 space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                            <i data-lucide="download" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Export JSON / blw-data.json</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Download a dated backup snapshot or export <code>blw-data.json</code> to replace the file on your static host.
+                        </p>
+                        <div class="space-y-2">
+                            <button onclick="downloadJsonBackup()" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
+                                <i data-lucide="file-json" class="w-4 h-4 text-amber-400"></i>
+                                <span>Download Dated Backup</span>
+                            </button>
+                            <button onclick="downloadJsonBackup('blw-data.json')" class="w-full py-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
+                                <i data-lucide="file-down" class="w-4 h-4 text-amber-400"></i>
+                                <span>Export blw-data.json</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-3xl p-6 border border-white/10 space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-violet-500/10 text-violet-400 flex items-center justify-center">
+                            <i data-lucide="upload" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Restore from Backup</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Upload a previously exported JSON backup file to restore full ministry records.
+                        </p>
+                        <input type="file" id="import-json-file" accept=".json" onchange="handleImportJson(event)" class="hidden">
+                        <button onclick="document.getElementById('import-json-file').click()" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
+                            <i data-lucide="upload-cloud" class="w-4 h-4 text-violet-400"></i>
+                            <span>Upload File</span>
+                        </button>
+                    </div>
+
+                    <div class="glass-panel rounded-3xl p-6 border border-white/10 space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center">
+                            <i data-lucide="rotate-ccw" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Reset to Official Defaults</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Revert all sections, moments, and contacts back to the original official configuration.
+                        </p>
+                        <button onclick="resetToOfficialDefaults()" class="w-full py-3 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
+                            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                            <span>Reset Defaults</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODALS: ADD / EDIT MOMENT & EVENT                         -->
+    <!-- ======================================================== -->
+    <div id="modal-moment" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-xl w-full border border-white/10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                <h3 id="modal-moment-title" class="text-xl font-bold text-white">Add New Event</h3>
+                <button onclick="closeMomentModal()" class="text-zinc-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleSaveMoment(event)" class="mt-6 space-y-4">
+                <input type="hidden" id="moment-edit-id">
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Event Title</label>
+                    <input type="text" id="moment-title-input" required placeholder="e.g. A Night Of A Thousands Crusades" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs font-semibold text-white focus:outline-none transition">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Category Tag Label</label>
+                        <input type="text" id="moment-tag-input" required placeholder="e.g. Campus Crusade, Healing Streams" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs font-semibold text-white focus:outline-none transition">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Location</label>
+                        <input type="text" id="moment-location-input" required placeholder="e.g. Campuses Across Tanzania" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs font-semibold text-white focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Image URL / Path</label>
+                    <input type="text" id="moment-image-input" required placeholder="e.g. gallery/A Night Of A Thousands Crusades.jpeg" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Event Caption / Summary</label>
+                    <textarea id="moment-caption-input" rows="3" required placeholder="Describe testimonies, attendances, manifestations..." class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition"></textarea>
+                </div>
+
+                <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeMomentModal()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-300 transition">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-bold text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 transition">
+                        <i data-lucide="check" class="w-4 h-4"></i>
+                        <span>Save Event</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL: ADD / EDIT CAMPUS CHAPTER                         -->
+    <!-- ======================================================== -->
+    <div id="modal-campus" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-2xl w-full border border-white/10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                <h3 id="modal-campus-title" class="text-xl font-bold text-white">Add New Campus Chapter</h3>
+                <button onclick="closeCampusModal()" class="text-zinc-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleSaveCampus(event)" class="mt-6 space-y-4">
+                <input type="hidden" id="campus-edit-key">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">University Full Name</label>
+                        <input type="text" id="campus-name-input" required placeholder="e.g. University of Dar es Salaam (UDSM)" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs font-semibold text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">City / Location</label>
+                        <input type="text" id="campus-city-input" required placeholder="e.g. Dar es Salaam (Mlimani Campus)" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Chapter Tag</label>
+                        <input type="text" id="campus-tag-input" required placeholder="e.g. Main Campus & Branches Chapter" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Mid-Week Service Schedule</label>
+                        <input type="text" id="campus-midweek-input" required placeholder="e.g. Wednesdays: 5:00 PM - 7:00 PM" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Sunday Fellowship Schedule</label>
+                        <input type="text" id="campus-sunday-input" required placeholder="e.g. Sundays: 9:00 AM - 11:30 AM" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5 sm:col-span-2">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Campus Fellowship Venue / Hall</label>
+                        <input type="text" id="campus-venue-input" required placeholder="e.g. Main Lecture Theater 2 (MLT 2) / Student Center Arena" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Coordinator Title / Name</label>
+                        <input type="text" id="campus-coordinator-input" required placeholder="e.g. Campus Pastor — BLW UDSM Chapter" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Coordinator WhatsApp / Phone</label>
+                        <input type="text" id="campus-phone-input" required placeholder="e.g. +255673780973" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeCampusModal()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-300 transition">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-bold text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 transition">
+                        <i data-lucide="check" class="w-4 h-4"></i>
+                        <span>Save Campus Chapter</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL: ADD / EDIT LEADER                                 -->
+    <!-- ======================================================== -->
+    <div id="modal-leader" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-xl w-full border border-white/10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                <h3 id="modal-leader-title" class="text-xl font-bold text-white">Add Ministry Leader</h3>
+                <button onclick="closeLeaderModal()" class="text-zinc-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleSaveLeader(event)" class="mt-6 space-y-4">
+                <input type="hidden" id="leader-edit-id">
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Leader Name</label>
+                    <input type="text" id="leader-name-input" required placeholder="e.g. Pastor Famous Eineh" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs font-semibold text-white focus:outline-none transition">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Official Title / Role</label>
+                        <input type="text" id="leader-title-input" required placeholder="e.g. Regional Secretary" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Jurisdiction / Zone</label>
+                        <input type="text" id="leader-region-input" required placeholder="e.g. BLW East Central Africa" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Photo URL</label>
+                    <input type="text" id="leader-image-input" required placeholder="e.g. gallery/Pastor Famous Eineh - Regional Secretary - BLW EAST CENTRAL AFRICA.jpg" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Bio / Ministry Assignment</label>
+                    <textarea id="leader-bio-input" rows="3" required placeholder="Describe the leadership assignment..." class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition"></textarea>
+                </div>
+
+                <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeLeaderModal()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-300 transition">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-bold text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 transition">
+                        <i data-lucide="check" class="w-4 h-4"></i>
+                        <span>Save Leader</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL: ADD / EDIT QUOTE                                  -->
+    <!-- ======================================================== -->
+    <div id="modal-quote" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-xl w-full border border-white/10 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                <h3 id="modal-quote-title" class="text-xl font-bold text-white">Add Prophetic Teaching</h3>
+                <button onclick="closeQuoteModal()" class="text-zinc-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleSaveQuote(event)" class="mt-6 space-y-4">
+                <input type="hidden" id="quote-edit-id">
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Teaching / Quote Statement</label>
+                    <textarea id="quote-text-input" rows="4" required placeholder="Enter the profound quote from the Man of God..." class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Speaker Name</label>
+                        <input type="text" id="quote-author-input" required value="Pastor Chris Oyakhilome" class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-amber-400">Speaker Title</label>
+                        <input type="text" id="quote-role-input" required value="President, Believers' LoveWorld Inc." class="w-full bg-obsidian-900 border border-white/10 focus:border-amber-500 rounded-2xl py-3 px-4 text-xs text-white focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeQuoteModal()" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-300 transition">Cancel</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-bold text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 transition">
+                        <i data-lucide="check" class="w-4 h-4"></i>
+                        <span>Save Teaching</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- 3. JAVASCRIPT CMS ENGINE                                 -->
+    <!-- ======================================================== -->
+    <script>
+        // Official Default Dataset
+        let blwData = null;
+
+        function safeCreateIcons() {
+            if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+                try { lucide.createIcons(); } catch(e) { console.warn(e); }
+            }
+        }
+
+        function escapeHtml(str) {
+            if (str === undefined || str === null) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // Toast Feedback System
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const isSuccess = type === 'success';
+            toast.className = `px-5 py-3.5 rounded-2xl ${isSuccess ? 'bg-amber-500 text-obsidian-950 font-bold' : 'bg-red-500 text-white font-semibold'} text-xs shadow-2xl flex items-center gap-2 transform translate-y-2 opacity-0 transition-all duration-300 z-50`;
+            toast.innerHTML = `
+                <i data-lucide="${isSuccess ? 'check-circle-2' : 'alert-circle'}" class="w-4 h-4 shrink-0"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            safeCreateIcons();
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function togglePasswordVisibility(id) {
+            const el = document.getElementById(id);
+            if (el) el.type = el.type === 'password' ? 'text' : 'password';
+        }
+
+        function unlockAdminPortal() {
+            sessionStorage.setItem('blw_authenticated', 'true');
+            const overlay = document.getElementById('admin-login-overlay');
+            const app = document.getElementById('admin-app');
+            if (overlay) {
+                overlay.style.display = 'none';
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            }
+            if (app) {
+                app.style.display = 'flex';
+                app.classList.remove('hidden');
+            }
+            showToast("Welcome to BLW Administrative Studio!");
+            initAdminApp();
+        }
+
+        function handleLogin(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const pinInput = document.getElementById('login-pin');
+            const pin = pinInput ? pinInput.value.trim() : '';
+            const savedPin = localStorage.getItem('blw_admin_pin') || 'BLW2026';
+
+            if (pin && pin === savedPin) {
+                unlockAdminPortal();
+            } else {
+                showToast("Invalid PIN. Enter the Admin PIN (Default: BLW2026).", "error");
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('blw_authenticated');
+            document.getElementById('admin-app').style.display = 'none';
+            document.getElementById('admin-app').classList.add('hidden');
+            const overlay = document.getElementById('admin-login-overlay');
+            overlay.style.display = 'flex';
+            overlay.classList.remove('hidden');
+            document.getElementById('login-pin').value = '';
+            showToast("Signed out successfully");
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-amber-500', 'text-obsidian-950');
+                btn.classList.add('text-zinc-400', 'hover:text-white', 'hover:bg-white/5');
+            });
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-amber-500', 'text-obsidian-950');
+                activeBtn.classList.remove('text-zinc-400', 'hover:text-white', 'hover:bg-white/5');
+            }
+
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
+            const targetPane = document.getElementById(`tab-${tabId}`);
+            if (targetPane) {
+                targetPane.classList.remove('hidden');
+            }
+            safeCreateIcons();
+        }
+
+        async function loadBlwData() {
+            const localData = localStorage.getItem('blw_campus_data');
+            if (localData) {
+                try {
+                    blwData = JSON.parse(localData);
+                    return;
+                } catch(e){}
+            }
+            try {
+                const res = await fetch('blw-data.json');
+                if (res.ok) {
+                    blwData = await res.json();
+                    return;
+                }
+            } catch(e){}
+
+            // Fallback default structure (synced with blw-data.json for file:// offline usage)
+            blwData = {
+                brand: { navTitle: "BLW CAMPUS", navTag: "TZ ZONE", navSubtitle: "Believers' Loveworld Inc.", logoUrl: "gallery/blw logo.png" },
+                hero: {
+                    pillTag: "TANZANIA ZONE", pillSubtitle: "Believers' Loveworld Inc.",
+                    headlinePrefix: "WELCOME TO BLW CAMPUS MINISTRY", headlineHighlight: "TANZANIA ZONE",
+                    description: "Believers’ LoveWorld (BLW) Campus Ministry is the vibrant arm of Christ Embassy Church under our Dear Man of God, Pastor Chris Oyakhilome.",
+                    motto1: "GIVING YOUR LIFE A MEANING", motto2: "Building a happier world with love",
+                    cta1Text: "Connect To Your University", cta1Link: "#campuses",
+                    cta2Text: "Explore Moments & Events", cta2Link: "#moments",
+                    pastorChris: { image: "gallery/PST CHRIS BIBLE.png", badge: "Anointed Global Ministry", name: "Pastor Chris Oyakhilome Dsc. Dsc. DD", role: "President of Believers' Loveworld Inc. & Christ Embassy" },
+                    stats: [
+                        { id: "stat-1", value: "20+", label: "Universities Active" },
+                        { id: "stat-2", value: "10K+", label: "Youths Impacted" },
+                        { id: "stat-3", value: "100%", label: "Spirit & Excellence" },
+                        { id: "stat-4", value: "Global", label: "Mandate & Reach" }
+                    ]
+                },
+                aboutSection: {
+                    tag: "",
+                    title: "About BLW Campus Ministry",
+                    registrationNote: "Believers’ LoveWorld Inc., also known as Christ Embassy, is a non-profit organization duly registered with the Tanzanian Government.",
+                    description: "Believers’ LoveWorld (BLW) Campus Ministry is the vibrant arm of Christ Embassy Church under our Dear Man of God, Pastor Chris Oyakhilome. It is responsible for reaching and impacting students and workers through campus fellowships established in numerous institutions across the world.",
+                    beliefTitle: "Our Belief",
+                    beliefStatement: "We strongly believe that young people are the future of a nation, and the university is the breeding ground for the next generation of leaders."
+                },
+                momentsSection: { tag: "", title: "Moments & Events", description: "High-impact campus crusades, miraculous healing encounters, youth conferences, and nationwide evangelical campaigns.", badgeText: "4 High-Impact Events" },
+                moments: [
+                    { id: "event-1", title: "OUTREACH ACTIVITIES", category: "outreach-activities", tagLabel: "Outreach Activities", location: "Campuses Across Tanzania", caption: "THOUSANDS OF UNIVERSITY YOUTHS GATHERED TO SATURATE THEIR CATCHMENT AREAS WITH THE RHAPSODY OF REALITIES.", image: "gallery/A Night Of A Thousands Crusades.jpeg" },
+                    { id: "event-2", title: "Healing Streams", category: "healing", tagLabel: "Healing Streams", location: "Live Broadcast Centers Tanzania", caption: "Experiencing the miraculous and supernatural healing power of God across university fellowship centers.", image: "gallery/Healing Streams.jpeg" },
+                    { id: "event-3", title: "TRAINING AND EMPOWERMENT PROGRAMS", category: "training-empowerment", tagLabel: "Training & Empowerment", location: "National Conference Arena", caption: "Ministry training, leadership development, and empowerment initiatives equipping university delegates, campus fellows, and student ministers for impact.", image: "gallery/National Youth Conference.JPG" },
+                    { id: "event-4", title: "Rhapsody Reach Out", category: "outreach", tagLabel: "Reach Out World", location: "Colleges Nationwide", caption: "Aggressive evangelism and massive distribution of Rhapsody of Realities daily devotional to university students.", image: "gallery/Rhapsody Reach Out.jpeg" }
+                ],
+                mandateSection: {
+                    tag: "", title: "Our Vision & Mission",
+                    cards: [
+                        { id: "card-vision", step: "01 / Foundation", title: "Our Vision", description: "To take the divine presence of God to the nations and peoples of the world and to demonstrate the character of the Spirit." },
+                        { id: "card-mission", step: "02 / Empowerment", title: "Our Mission", description: "To raise generations of men and women who will come into their inheritance to fulfill God's dream." }
+                    ]
+                },
+                purposeSection: {
+                    tag: "",
+                    title: "OUR PURPOSE",
+                    statement: "To make known and bring them into their inheritance.",
+                    motto: "Building a happier world with love"
+                },
+                leadershipSection: { tag: "", title: "Leadership of BLW Campus Ministry", description: "Visionary ministers guiding student leaders, campus cells, and regional summits with divine wisdom, spiritual supremacy, and academic excellence." },
+                leadership: [
+                    { id: "leader-0", name: "Rev. Dr. Chris Oyakhilome", title: "D.Sc., D.Sc., D.D.", region: "President, LoveWorld Inc.", tag: "International President", image: "gallery/PST CHRIS BIBLE.png", bio: "Founder and President of LoveWorld Inc. (Christ Embassy), taking God's divine presence to the nations and peoples of the world." },
+                    { id: "leader-1", name: "Pastor Famous Eineh", title: "Regional Secretary", region: "BLW East Central Africa", tag: "Regional Leadership", image: "gallery/Pastor Famous Eineh - Regional Secretary - BLW EAST CENTRAL AFRICA.jpg", bio: "Steering the supernatural spread of God's Word across colleges and universities throughout East and Central Africa with passion, excellence, and authority in the Spirit." },
+                    { id: "leader-2", name: "Pastor Jesse Julius", title: "Zonal Secretary", region: "BLW Tanzania Zone", tag: "Zonal Leadership", image: "gallery/Pastor Jesse Julius - Zonal Secretary - BLW TANZANIA ZONE.png", bio: "Spearheading campus fellowships, student activations, leadership mentoring, and the aggressive distribution of Rhapsody of Realities in all higher institutions across Tanzania." }
+                ],
+                principlesSection: {
+                    tag: "", title: "The Three Core Principles", description: "The supernatural paradigm that differentiates every BLW Campus ambassador globally.",
+                    principles: [
+                        { id: "principle-1", tag: "Principle 01", title: "BLW Exceptionalism", description: "The theory and divine reality that we are uniquely different in some way; it connotes a superiority of ideology and supremacy of calling, which also confers on us the burden and responsibility of leadership for the whole world.", footerTag: "Supremacy of calling • Distinct mindset" },
+                        { id: "principle-2", tag: "Principle 02", title: "BLW Expansionism", description: "The doctrine and endeavor of expanding our reach and influence through the relentless spreading of our message. We have that calling that Abraham had to take over the world and there are no limits for us.", footerTag: "Global conquest • No territorial boundaries" },
+                        { id: "principle-3", tag: "Principle 03", title: "BLW Perfectionism", description: "The idea, doctrine, and disposition to regard anything short of perfect and excellent as unacceptable. We execute with divine precision, unmatched order, and supernatural brilliance.", footerTag: "Flawless execution • Supreme standard" }
+                    ]
+                },
+                programsSection: {
+                    tag: "", title: "Fellowship & Global Summits", tabWeekly: "Campus Weekly Services", tabGlobal: "Global Programs with Pastor Chris",
+                    weekly: [
+                        { id: "serv-1", tag: "Every Sunday", title: "Sunday Service", time: "9:00 AM – 12:00 PM", description: "A vibrant encounter in God's presence with high-impact praise, the profound teaching of the Word, and intense manifestations of the Spirit." },
+                        { id: "serv-2", tag: "Midweek Recharge", title: "Wednesday Service", time: "6:00 PM – 7:00 PM", description: "Mid-week spiritual fortification, doctrine deepening, and intercession to navigate academic life in absolute victory." },
+                        { id: "serv-3", tag: "Daily Communion", title: "Morning Prayers", time: "Monday – Friday: 5:00 AM – 6:00 AM", description: "Online morning devotion framing our world and commanding our day before university lectures begin." }
+                    ],
+                    global: [
+                        { id: "glob-1", tag: "Quarterly Summit", title: "Healing Streams Live", time: "Every 4 Months", description: "Global healing services with Pastor Chris, broadcasting to billions around the world." },
+                        { id: "glob-2", tag: "Global Warfare", title: "Global Day of Prayer", time: "Special Broadcasts", description: "Unbroken 24-hour global prayer altering policies and empowering nations in truth." },
+                        { id: "glob-3", tag: "Prophetic Unveiling", title: "Your LoveWorld Specials", time: "Multi-Season Series", description: "Deep prophetic insight into current global events through the lens of God's Word." },
+                        { id: "glob-4", tag: "Global Literature", title: "Reach Out World (ROW)", time: "Continuous Crusade", description: "Saturating colleges with Rhapsody of Realities in all languages and formats." }
+                    ]
+                },
+                quotesSection: {
+                    tag: "", title: "Words from the Man of God", subtitle: "Foundational doctrines by Rev. (Dr.) Chris Oyakhilome DSc. DSc. DD.",
+                    quotes: [
+                        { id: "quote-1", text: "If you act your faith, you may look foolish for five minutes; but if you don't act your faith, you may be foolish forever.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." },
+                        { id: "quote-2", text: "Success is impacting the world with the investment of your personality. Find a need and reach it; find a hurt and heal it.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." },
+                        { id: "quote-3", text: "The Word of God is your life. Feed on it daily, meditate upon it, and you will make your way prosperous with good success.", author: "Pastor Chris Oyakhilome", authorRole: "President, Believers' LoveWorld Inc." }
+                    ]
+                },
+                campusesSection: { tag: "", title: "Campus Fellowship Portal", description: "Select your university from the list below to access specific fellowship venue, meeting times, campus coordinator, and direct WhatsApp connect." },
+                campuses: {
+                    udsm: { name: "University of Dar es Salaam (UDSM)", city: "Dar es Salaam (Mlimani Campus)", tag: "Main Campus & Branches Chapter", midweek: "Wednesdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:30 AM", venue: "Main Lecture Theater 2 (MLT 2) / Student Center Arena", coordinator: "Campus Pastor — BLW UDSM Chapter", phone: "+255673780973" },
+                    udom: { name: "University of Dodoma (UDOM)", city: "Dodoma (Capital City)", tag: "Capital City Grand Chapter", midweek: "Wednesdays: 5:30 PM - 7:15 PM", sunday: "Sundays: 9:30 AM - 12:00 PM", venue: "College of Humanities / Central Assembly Amphitheater", coordinator: "Campus Pastor — BLW UDOM Chapter", phone: "+255719048348" },
+                    kiu: { name: "Kampala International University (KIU)", city: "Dar es Salaam (Gongo la Mboto)", tag: "KIU Campus Chapter", midweek: "Wednesdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:30 AM", venue: "Main Fellowship Auditorium, Student Complex", coordinator: "Campus Fellowship Coordinator", phone: "+255623380416" },
+                    muhas: { name: "Muhimbili University of Health & Allied Sciences (MUHAS)", city: "Dar es Salaam (Upanga)", tag: "Medical Sciences Chapter", midweek: "Wednesdays: 6:00 PM - 7:30 PM", sunday: "Sundays: 8:30 AM - 10:45 AM", venue: "Medical Lecture Hall B / Student Hostel Fellowship Hall", coordinator: "Campus Coordinator — MUHAS", phone: "+255763014070" },
+                    dit: { name: "Dar es Salaam Institute of Technology (DIT)", city: "Dar es Salaam (Posta)", tag: "Engineering Hub Chapter", midweek: "Thursdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:00 AM", venue: "Technology Block A, Main Assembly Hall", coordinator: "Campus Fellowship Leader — DIT", phone: "+255763014070" },
+                    sua: { name: "Sokoine University of Agriculture (SUA)", city: "Morogoro", tag: "SUA Main & Mazimbu Campuses", midweek: "Wednesdays: 5:30 PM - 7:15 PM", sunday: "Sundays: 9:00 AM - 11:30 AM", venue: "Mazimbu Assembly Hall / Main Campus Pavilion", coordinator: "Campus Pastor — BLW SUA Chapter", phone: "+255772122967" },
+                    must: { name: "Mbeya University of Science & Technology (MUST)", city: "Mbeya (Iyunga)", tag: "MUST Tech Chapter", midweek: "Wednesdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:30 AM", venue: "Engineering Auditorium 1", coordinator: "Campus Fellowship Coordinator", phone: "+255772122967" },
+                    ardhi: { name: "Ardhi University", city: "Dar es Salaam (Observation Hill)", tag: "Survey & Architecture Chapter", midweek: "Wednesdays: 5:00 PM - 6:45 PM", sunday: "Sundays: 9:00 AM - 11:00 AM", venue: "School of Architecture Hall 3", coordinator: "Campus Coordinator — Ardhi", phone: "+255783784633" },
+                    stjohns: { name: "St. John's University of Tanzania", city: "Dodoma", tag: "St. John’s Chapter", midweek: "Wednesdays: 5:30 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:15 AM", venue: "Campus Assembly Hall", coordinator: "Campus Fellowship Leader", phone: "+255719048348" },
+                    kairuki: { name: "Hubert Kairuki Memorial University (HKMU)", city: "Dar es Salaam (Mikocheni)", tag: "Health & Clinical Chapter", midweek: "Wednesdays: 6:00 PM - 7:30 PM", sunday: "Sundays: 9:00 AM - 11:00 AM", venue: "Clinical Skills Lab Conference Center", coordinator: "Campus Coordinator", phone: "+255769268941" },
+                    stjoseph: { name: "St. Joseph University in Tanzania (SJUIT)", city: "Dar es Salaam (Boko / Mbezi)", tag: "SJUIT Chapter", midweek: "Thursdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:30 AM", venue: "Block D, Engineering Wing Auditorium", coordinator: "Campus Coordinator", phone: "+255684350109" },
+                    tia: { name: "Tanzania Institute of Accountancy (TIA)", city: "Dar es Salaam (Kurasini)", tag: "TIA Finance Chapter", midweek: "Wednesdays: 4:45 PM - 6:45 PM", sunday: "Sundays: 9:00 AM - 11:00 AM", venue: "Accountancy Lecture Hall 4", coordinator: "Campus Coordinator — TIA", phone: "+255625269461" },
+                    ifm: { name: "Institute of Finance Management (IFM)", city: "Dar es Salaam (City Center)", tag: "IFM Banking Chapter", midweek: "Wednesdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:15 AM", venue: "Tower Lecture Hall 1", coordinator: "Campus Coordinator — IFM", phone: "+255772122967" },
+                    cbe: { name: "College of Business Education (CBE)", city: "Dar es Salaam (Bibi Titi)", tag: "CBE Chapter", midweek: "Wednesdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:00 AM", venue: "Postgraduate Block Assembly Room", coordinator: "Campus Coordinator — CBE", phone: "+255772122967" },
+                    jordan: { name: "Jordan University College", city: "Morogoro", tag: "Jordan Campus Chapter", midweek: "Wednesdays: 5:15 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:30 AM", venue: "Arts & Social Sciences Hall", coordinator: "Campus Coordinator", phone: "+255772122967" },
+                    rucu: { name: "Ruaha Catholic University (RUCU)", city: "Iringa", tag: "RUCU Chapter", midweek: "Wednesdays: 5:30 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:15 AM", venue: "Campus Lecture Complex", coordinator: "Campus Coordinator", phone: "+255772122967" },
+                    tudarco: { name: "Tumaini University Dar es Salaam College (TUDARCo)", city: "Dar es Salaam (Mwenge)", tag: "TUDARCo Chapter", midweek: "Wednesdays: 5:00 PM - 7:00 PM", sunday: "Sundays: 9:00 AM - 11:00 AM", venue: "Mwenge Campus Hall 2", coordinator: "Campus Coordinator", phone: "+255772122967" }
+                },
+                settings: {
+                    phone: "0772 122 967", whatsapp: "+255 772 122 967", floatingPhone: "+255 673 780 973",
+                    instagram: "blwtanzaniazone", email: "blwtanzaniazone@gmail.com", location: "Dar es Salaam, Tanzania",
+                    defaultStudentPin: "BLW2026", motto: "Building a happier world with love",
+                    footerDescription: "A vibrant arm of Believers' Loveworld Inc., taking God's Word to all higher learning institutions across Tanzania.",
+                    copyright: "© 2026 BLW Campus Ministry — Tanzania Zone. All Rights Reserved."
+                }
+            };
+        }
+
+        function renderOverview() {
+            if (!blwData) return;
+            const campusCount = Object.keys(blwData.campuses || {}).length;
+            const momentsCount = (blwData.moments || []).length;
+            document.getElementById('stat-campus-count').textContent = campusCount;
+            document.getElementById('stat-moments-count').textContent = momentsCount;
+            document.getElementById('stat-phone-display').textContent = blwData.settings.phone || '0772 122 967';
+            document.getElementById('stat-instagram-display').textContent = `@${blwData.settings.instagram || 'blwtanzaniazone'}`;
+        }
+
+        // --- UNIVERSAL TEXT BOX DELETION & RESTORATION ENGINE ---
+        const deletedFieldsBackup = {};
+
+        function deleteTextBox(fieldId, fallback = "") {
+            const input = document.getElementById(fieldId);
+            if (!input) return;
+            if (!deletedFieldsBackup[fieldId]) {
+                deletedFieldsBackup[fieldId] = input.value || fallback;
+            }
+            input.value = "";
+            syncFieldUI(fieldId, true);
+            showToast("Text box deleted — will be completely hidden on public site");
+        }
+
+        function restoreTextBox(fieldId) {
+            const input = document.getElementById(fieldId);
+            if (!input) return;
+            input.value = deletedFieldsBackup[fieldId] || "";
+            syncFieldUI(fieldId, false);
+            showToast("Text box restored!");
+        }
+
+        function syncFieldUI(fieldId, isDeleted = null) {
+            const input = document.getElementById(fieldId);
+            if (!input) return;
+            const deleted = isDeleted !== null ? isDeleted : (!input.value || input.value.trim() === "");
+            const badge = document.getElementById(`badge-del-${fieldId}`);
+            const btn = document.getElementById(`btn-del-${fieldId}`);
+            
+            if (deleted) {
+                input.classList.add('border-red-500/50', 'bg-red-950/20');
+                input.placeholder = "[TEXT BOX DELETED — Hidden on website]";
+                if (badge) badge.classList.remove('hidden');
+                if (btn) {
+                    btn.innerHTML = `<i data-lucide="rotate-ccw" class="w-3 h-3 text-amber-400"></i> <span class="text-amber-400">Restore</span>`;
+                    btn.onclick = () => restoreTextBox(fieldId);
+                    btn.title = "Restore this text box";
+                }
+            } else {
+                input.classList.remove('border-red-500/50', 'bg-red-950/20');
+                input.placeholder = "";
+                if (badge) badge.classList.add('hidden');
+                if (btn) {
+                    btn.innerHTML = `<i data-lucide="trash-2" class="w-3 h-3 text-red-400"></i> <span class="text-red-400">Delete Box</span>`;
+                    btn.onclick = () => deleteTextBox(fieldId);
+                    btn.title = "Delete this text box completely";
+                }
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function setFieldVal(fieldId, val, defaultVal = "") {
+            const input = document.getElementById(fieldId);
+            if (!input) return;
+            input.value = (val !== undefined && val !== null) ? val : defaultVal;
+            syncFieldUI(fieldId, input.value.trim() === "");
+        }
+
+        // --- HERO EDITOR ---
+        function populateHeroForm() {
+            if (!blwData) return;
+            const b = blwData.brand || {};
+            const setBrandVal = (id, val, def) => {
+                const el = document.getElementById(id);
+                if (el) el.value = (val !== undefined && val !== null) ? val : def;
+            };
+            setBrandVal('brand-nav-title', b.navTitle, 'BLW CAMPUS');
+            setBrandVal('brand-nav-tag', b.navTag, 'TZ ZONE');
+            setBrandVal('brand-nav-subtitle', b.navSubtitle, "Believers' Loveworld Inc.");
+            setBrandVal('brand-logo-url', b.logoUrl, 'gallery/blw logo.png');
+
+            if (!blwData.hero) return;
+            const h = blwData.hero;
+            setFieldVal('hero-pill-tag', h.pillTag, 'TANZANIA ZONE');
+            setFieldVal('hero-pill-sub', h.pillSubtitle, "Believers' Loveworld Inc.");
+            setFieldVal('hero-head-prefix', h.headlinePrefix, 'RAISING A GENERATION OF');
+            setFieldVal('hero-head-highlight', h.headlineHighlight, 'SPIRITUAL GIANTS & LEADERS');
+            setFieldVal('hero-desc', h.description, '');
+            setFieldVal('hero-motto1', h.motto1, 'Giving your life a meaning!');
+            setFieldVal('hero-motto2', h.motto2, 'Building a happier world with love');
+            setFieldVal('hero-cta1', h.cta1Text, 'Connect To Your University');
+            setFieldVal('hero-cta2', h.cta2Text, 'Explore Moments & Events');
+
+            if (h.pastorChris) {
+                setFieldVal('hero-pc-img', h.pastorChris.image, 'gallery/PST CHRIS BIBLE.png');
+                setFieldVal('hero-pc-badge', h.pastorChris.badge, 'Spiritual Leader');
+                setFieldVal('hero-pc-name', h.pastorChris.name, 'Pastor Chris Oyakhilome Dsc. Dsc. DD');
+                setFieldVal('hero-pc-role', h.pastorChris.role, "President of Believers' Loveworld Inc. & Christ Embassy");
+                
+                const btn = document.getElementById('btn-toggle-pc-card');
+                const lbl = document.getElementById('lbl-toggle-pc-card');
+                const container = document.getElementById('pc-fields-container');
+                if (h.pastorChris.deleted) {
+                    if (container) container.classList.add('opacity-40', 'pointer-events-none');
+                    if (lbl) lbl.textContent = "Restore Card";
+                    if (btn) btn.className = "px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition";
+                } else {
+                    if (container) container.classList.remove('opacity-40', 'pointer-events-none');
+                    if (lbl) lbl.textContent = "Delete Card Completely";
+                    if (btn) btn.className = "px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold flex items-center gap-1.5 transition";
+                }
+            }
+
+            renderStatsAdmin();
+        }
+
+        function togglePastorChrisSpotlight() {
+            if (!blwData.hero) blwData.hero = {};
+            if (!blwData.hero.pastorChris) blwData.hero.pastorChris = {};
+            const pc = blwData.hero.pastorChris;
+            pc.deleted = !pc.deleted;
+            
+            const btn = document.getElementById('btn-toggle-pc-card');
+            const lbl = document.getElementById('lbl-toggle-pc-card');
+            const container = document.getElementById('pc-fields-container');
+            
+            if (pc.deleted) {
+                if (container) container.classList.add('opacity-40', 'pointer-events-none');
+                if (lbl) lbl.textContent = "Restore Card";
+                if (btn) btn.className = "px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition";
+                showToast("Pastor Chris spotlight card marked as deleted!");
+            } else {
+                if (container) container.classList.remove('opacity-40', 'pointer-events-none');
+                if (lbl) lbl.textContent = "Delete Card Completely";
+                if (btn) btn.className = "px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold flex items-center gap-1.5 transition";
+                showToast("Pastor Chris spotlight card restored!");
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function renderStatsAdmin() {
+            const list = document.getElementById('stats-admin-list');
+            if (!list) return;
+            list.innerHTML = '';
+            const stats = blwData.hero && Array.isArray(blwData.hero.stats) ? blwData.hero.stats : [];
+            stats.forEach((st, idx) => {
+                const box = document.createElement('div');
+                box.className = "p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2 relative group";
+                box.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold uppercase text-zinc-400">Stat #${idx + 1}</span>
+                        <button type="button" onclick="deleteStatBox(${idx})" class="text-zinc-500 hover:text-red-400 p-1 rounded transition" title="Delete Stat Box Completely">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="stat-val-${idx}" value="${escapeHtml(st.value || '')}" placeholder="Value (e.g. 20+)" class="w-full bg-obsidian-900 border border-white/10 rounded-lg p-2 text-xs text-white font-bold">
+                    <input type="text" id="stat-lbl-${idx}" value="${escapeHtml(st.label || '')}" placeholder="Label (e.g. Universities Active)" class="w-full bg-obsidian-900 border border-white/10 rounded-lg p-2 text-xs text-zinc-300">
+                `;
+                list.appendChild(box);
+            });
+            safeCreateIcons();
+        }
+
+        function addStatBox() {
+            if (!blwData.hero) blwData.hero = {};
+            if (!Array.isArray(blwData.hero.stats)) blwData.hero.stats = [];
+            blwData.hero.stats.push({ value: "100%", label: "New Metric" });
+            renderStatsAdmin();
+            showToast("Added new stat metric box!");
+        }
+
+        function deleteStatBox(idx) {
+            if (confirm("Delete this stat metric box completely?")) {
+                blwData.hero.stats.splice(idx, 1);
+                renderStatsAdmin();
+                persistData();
+                showToast("Stat metric box deleted completely!");
+            }
+        }
+
+        function handleSaveHero(e) {
+            e.preventDefault();
+            if (!blwData.brand) blwData.brand = {};
+            blwData.brand.navTitle = (document.getElementById('brand-nav-title')?.value || '').trim();
+            blwData.brand.navTag = (document.getElementById('brand-nav-tag')?.value || '').trim();
+            blwData.brand.navSubtitle = (document.getElementById('brand-nav-subtitle')?.value || '').trim();
+            blwData.brand.logoUrl = (document.getElementById('brand-logo-url')?.value || '').trim() || 'gallery/blw logo.png';
+
+            if (!blwData.hero) blwData.hero = {};
+            const h = blwData.hero;
+            h.pillTag = document.getElementById('hero-pill-tag').value.trim();
+            h.pillSubtitle = document.getElementById('hero-pill-sub').value.trim();
+            h.headlinePrefix = document.getElementById('hero-head-prefix').value.trim();
+            h.headlineHighlight = document.getElementById('hero-head-highlight').value.trim();
+            h.description = document.getElementById('hero-desc').value.trim();
+            h.motto1 = document.getElementById('hero-motto1').value.trim();
+            h.motto2 = document.getElementById('hero-motto2').value.trim();
+            h.cta1Text = document.getElementById('hero-cta1').value.trim();
+            h.cta2Text = document.getElementById('hero-cta2').value.trim();
+
+            if (!h.pastorChris) h.pastorChris = {};
+            h.pastorChris.image = document.getElementById('hero-pc-img').value.trim();
+            h.pastorChris.badge = document.getElementById('hero-pc-badge').value.trim();
+            h.pastorChris.name = document.getElementById('hero-pc-name').value.trim();
+            h.pastorChris.role = document.getElementById('hero-pc-role').value.trim();
+
+            // Save stats from dynamic inputs
+            if (Array.isArray(h.stats)) {
+                h.stats.forEach((st, idx) => {
+                    const v = document.getElementById(`stat-val-${idx}`);
+                    const l = document.getElementById(`stat-lbl-${idx}`);
+                    if (v) st.value = v.value.trim();
+                    if (l) st.label = l.value.trim();
+                });
+            }
+
+            persistData();
+            showToast("Hero section & headlines updated!");
+        }
+
+        // --- MOMENTS EDITOR ---
+        function renderMoments() {
+            const sec = blwData.momentsSection || {};
+            setFieldVal('moments-sec-tag', sec.tag, '');
+            setFieldVal('moments-sec-title', sec.title, '');
+            setFieldVal('moments-sec-desc', sec.description, '');
+            setFieldVal('moments-sec-badge', sec.badgeText, '');
+
+            const grid = document.getElementById('moments-admin-grid');
+            grid.innerHTML = '';
+
+            (blwData.moments || []).forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div class="relative w-full aspect-[16/10] bg-obsidian-950 overflow-hidden">
+                        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/80 text-amber-400 border border-amber-500/30">
+                            ${escapeHtml(item.tagLabel || item.category)}
+                        </span>
+                    </div>
+
+                    <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="text-[11px] font-semibold text-zinc-400 flex items-center gap-1.5 mb-1">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i>
+                                <span>${escapeHtml(item.location)}</span>
+                            </div>
+                            <h3 class="text-xl font-black text-white leading-snug">${escapeHtml(item.title)}</h3>
+                            <p class="text-xs text-zinc-300 mt-2 line-clamp-3 leading-relaxed">${escapeHtml(item.caption)}</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-[11px] text-zinc-500">Event #${index + 1}</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="editMoment('${escapeHtml(item.id)}')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-amber-400 flex items-center gap-1 transition">
+                                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                                    <span>Edit</span>
+                                </button>
+                                <button onclick="deleteMoment('${escapeHtml(item.id)}')" class="p-1.5 rounded-xl bg-white/5 hover:bg-red-500/20 text-zinc-400 hover:text-red-400 transition" title="Delete">
+                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            safeCreateIcons();
+        }
+
+        // --- MANDATE EDITOR ---
+        function populateMandateForm() {
+            if (!blwData || !blwData.mandateSection) return;
+            const m = blwData.mandateSection;
+            setFieldVal('mandate-sec-tag', m.tag, '');
+            setFieldVal('mandate-sec-title', m.title, 'Our Mandate & Core Compass');
+            renderMandateCardsAdmin();
+        }
+
+        function renderMandateCardsAdmin() {
+            const list = document.getElementById('mandate-cards-admin-list');
+            if (!list) return;
+            list.innerHTML = '';
+            const cards = blwData.mandateSection && Array.isArray(blwData.mandateSection.cards) ? blwData.mandateSection.cards : [];
+            cards.forEach((c, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between pb-2 border-b border-white/5">
+                        <span class="text-xs font-bold text-amber-400 uppercase">Card #${idx + 1}</span>
+                        <div class="flex items-center gap-2">
+                            <input type="text" id="mandate-step-${idx}" value="${escapeHtml(c.step || '')}" placeholder="Step (e.g. 01 / Foundation)" class="w-40 bg-obsidian-900 border border-white/10 rounded-lg p-1.5 text-xs text-zinc-300">
+                            <button type="button" onclick="deleteMandateCard(${idx})" class="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold flex items-center gap-1 transition" title="Delete this card completely">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                <span>Delete Card</span>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="mandate-title-${idx}" value="${escapeHtml(c.title || '')}" placeholder="Card Title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                    <textarea id="mandate-desc-${idx}" rows="3" placeholder="Card Description" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">${escapeHtml(c.description || '')}</textarea>
+                `;
+                list.appendChild(card);
+            });
+            safeCreateIcons();
+        }
+
+        function addMandateCard() {
+            if (!blwData.mandateSection) blwData.mandateSection = {};
+            if (!Array.isArray(blwData.mandateSection.cards)) blwData.mandateSection.cards = [];
+            const num = blwData.mandateSection.cards.length + 1;
+            blwData.mandateSection.cards.push({
+                id: `card-${Date.now()}`,
+                step: `0${num} / Blueprint`,
+                title: "New Mandate Card",
+                description: "Describe the foundational purpose and spiritual focus here."
+            });
+            renderMandateCardsAdmin();
+            showToast("Added new mandate blueprint card!");
+        }
+
+        function deleteMandateCard(idx) {
+            if (confirm("Delete this mandate card completely from the website?")) {
+                blwData.mandateSection.cards.splice(idx, 1);
+                renderMandateCardsAdmin();
+                persistData();
+                showToast("Mandate card deleted completely!");
+            }
+        }
+
+        function handleSaveMandate(e) {
+            e.preventDefault();
+            if (!blwData.mandateSection) blwData.mandateSection = {};
+            const m = blwData.mandateSection;
+            m.tag = document.getElementById('mandate-sec-tag').value.trim();
+            m.title = document.getElementById('mandate-sec-title').value.trim();
+
+            if (Array.isArray(m.cards)) {
+                m.cards.forEach((c, idx) => {
+                    const st = document.getElementById(`mandate-step-${idx}`);
+                    const ti = document.getElementById(`mandate-title-${idx}`);
+                    const de = document.getElementById(`mandate-desc-${idx}`);
+                    if (st) c.step = st.value.trim();
+                    if (ti) c.title = ti.value.trim();
+                    if (de) c.description = de.value.trim();
+                });
+            }
+
+            persistData();
+            showToast("Our Mandate blueprint saved!");
+        }
+
+        // --- LEADERSHIP EDITOR ---
+        function renderLeadership() {
+            const sec = blwData.leadershipSection || {};
+            setFieldVal('leadership-sec-tag', sec.tag, '');
+            setFieldVal('leadership-sec-title', sec.title, '');
+            setFieldVal('leadership-sec-desc', sec.description, '');
+
+            const grid = document.getElementById('leadership-admin-grid');
+            grid.innerHTML = '';
+
+            (blwData.leadership || []).forEach(leader => {
+                const card = document.createElement('div');
+                card.className = "glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between space-y-4";
+                card.innerHTML = `
+                    <div class="flex items-start gap-4">
+                        <img src="${escapeHtml(leader.image)}" alt="${escapeHtml(leader.name)}" class="w-20 h-24 rounded-2xl object-cover object-top border border-white/10 shrink-0">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20">${escapeHtml(leader.tag || 'Ministry Leader')}</span>
+                            <h3 class="text-xl font-black text-white mt-1">${escapeHtml(leader.name)}</h3>
+                            <p class="text-xs font-semibold text-zinc-300 mt-0.5">${escapeHtml(leader.title)} &bull; ${escapeHtml(leader.region)}</p>
+                            <p class="text-xs text-zinc-400 mt-2 leading-relaxed">${escapeHtml(leader.bio)}</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/5 flex items-center justify-end gap-2">
+                        <button onclick="editLeader('${escapeHtml(leader.id)}')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-amber-400 flex items-center gap-1 transition">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                            <span>Edit</span>
+                        </button>
+                        <button onclick="deleteLeader('${escapeHtml(leader.id)}')" class="p-1.5 rounded-xl bg-white/5 hover:bg-red-500/20 text-zinc-400 hover:text-red-400 transition" title="Delete">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            safeCreateIcons();
+        }
+
+        // --- PRINCIPLES EDITOR ---
+        function populatePrinciplesForm() {
+            if (!blwData || !blwData.principlesSection) return;
+            const p = blwData.principlesSection;
+            setFieldVal('principles-sec-tag', p.tag, '');
+            setFieldVal('principles-sec-title', p.title, 'The Three Core Principles');
+            setFieldVal('principles-sec-desc', p.description, '');
+            renderPrinciplesAdmin();
+        }
+
+        function renderPrinciplesAdmin() {
+            const list = document.getElementById('principles-cards-admin-list');
+            if (!list) return;
+            list.innerHTML = '';
+            const principles = blwData.principlesSection && Array.isArray(blwData.principlesSection.principles) ? blwData.principlesSection.principles : [];
+            principles.forEach((pr, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between pb-2 border-b border-white/5">
+                        <span class="text-xs font-bold text-amber-400 uppercase">Principle #${idx + 1}</span>
+                        <div class="flex items-center gap-2">
+                            <input type="text" id="principle-tag-${idx}" value="${escapeHtml(pr.tag || '')}" placeholder="Tag (e.g. Principle 01)" class="w-40 bg-obsidian-900 border border-white/10 rounded-lg p-1.5 text-xs text-zinc-300">
+                            <button type="button" onclick="deletePrincipleCard(${idx})" class="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold flex items-center gap-1 transition" title="Delete this principle completely">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                <span>Delete Principle</span>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="text" id="principle-title-${idx}" value="${escapeHtml(pr.title || '')}" placeholder="Title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                    <textarea id="principle-desc-${idx}" rows="3" placeholder="Doctrine description" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">${escapeHtml(pr.description || '')}</textarea>
+                    <input type="text" id="principle-foot-${idx}" value="${escapeHtml(pr.footerTag || '')}" placeholder="Footer Tag" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2 text-xs text-amber-300 font-mono">
+                `;
+                list.appendChild(card);
+            });
+            safeCreateIcons();
+        }
+
+        function addPrincipleCard() {
+            if (!blwData.principlesSection) blwData.principlesSection = {};
+            if (!Array.isArray(blwData.principlesSection.principles)) blwData.principlesSection.principles = [];
+            const num = blwData.principlesSection.principles.length + 1;
+            blwData.principlesSection.principles.push({
+                id: `principle-${Date.now()}`,
+                tag: `Principle 0${num}`,
+                title: "New BLW Principle",
+                description: "Describe the supernatural doctrine and standard.",
+                footerTag: "Divine excellence • Supreme standard"
+            });
+            renderPrinciplesAdmin();
+            showToast("Added new core principle card!");
+        }
+
+        function deletePrincipleCard(idx) {
+            if (confirm("Delete this core principle card completely from the website?")) {
+                blwData.principlesSection.principles.splice(idx, 1);
+                renderPrinciplesAdmin();
+                persistData();
+                showToast("Principle card deleted completely!");
+            }
+        }
+
+        function handleSavePrinciples(e) {
+            e.preventDefault();
+            if (!blwData.principlesSection) blwData.principlesSection = {};
+            const p = blwData.principlesSection;
+            p.tag = document.getElementById('principles-sec-tag').value.trim();
+            p.title = document.getElementById('principles-sec-title').value.trim();
+            p.description = document.getElementById('principles-sec-desc').value.trim();
+
+            if (Array.isArray(p.principles)) {
+                p.principles.forEach((pr, idx) => {
+                    const tag = document.getElementById(`principle-tag-${idx}`);
+                    const title = document.getElementById(`principle-title-${idx}`);
+                    const desc = document.getElementById(`principle-desc-${idx}`);
+                    const foot = document.getElementById(`principle-foot-${idx}`);
+                    if (tag) pr.tag = tag.value.trim();
+                    if (title) pr.title = title.value.trim();
+                    if (desc) pr.description = desc.value.trim();
+                    if (foot) pr.footerTag = foot.value.trim();
+                });
+            }
+
+            persistData();
+            showToast("Three Core Principles updated!");
+        }
+
+        // --- PROGRAMS & SERVICES EDITOR ---
+        function populateProgramsForm() {
+            if (!blwData || !blwData.programsSection) return;
+            const p = blwData.programsSection;
+            setFieldVal('programs-sec-tag', p.tag, '');
+            setFieldVal('programs-sec-title', p.title, 'Fellowship & Global Summits');
+            setFieldVal('programs-tab-weekly', p.tabWeekly, 'Campus Weekly Services');
+            setFieldVal('programs-tab-global', p.tabGlobal, 'Global Programs with Pastor Chris');
+            renderProgramsAdmin();
+        }
+
+        function renderProgramsAdmin() {
+            const weeklyList = document.getElementById('weekly-services-admin-list');
+            const globalList = document.getElementById('global-programs-admin-list');
+            
+            if (weeklyList) {
+                weeklyList.innerHTML = '';
+                const weekly = blwData.programsSection && Array.isArray(blwData.programsSection.weekly) ? blwData.programsSection.weekly : [];
+                weekly.forEach((w, idx) => {
+                    const card = document.createElement('div');
+                    card.className = "p-5 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3";
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between pb-2 border-b border-white/5">
+                            <span class="text-xs font-bold text-amber-400 uppercase">Service #${idx + 1}</span>
+                            <button type="button" onclick="deleteWeeklyService(${idx})" class="px-2.5 py-1 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold flex items-center gap-1 transition">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                <span>Delete Service</span>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="weekly-tag-${idx}" value="${escapeHtml(w.tag || '')}" placeholder="Tag (e.g. Every Sunday)" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2 text-xs text-amber-400">
+                            <input type="text" id="weekly-time-${idx}" value="${escapeHtml(w.time || '')}" placeholder="Time (e.g. 9:00 AM – 12:00 PM)" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2 text-xs text-amber-300 font-mono">
+                        </div>
+                        <input type="text" id="weekly-title-${idx}" value="${escapeHtml(w.title || '')}" placeholder="Service Title" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white font-bold">
+                        <textarea id="weekly-desc-${idx}" rows="2" placeholder="Description" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-2.5 text-xs text-white">${escapeHtml(w.description || '')}</textarea>
+                    `;
+                    weeklyList.appendChild(card);
+                });
+            }
+
+            if (globalList) {
+                globalList.innerHTML = '';
+                const glob = blwData.programsSection && Array.isArray(blwData.programsSection.global) ? blwData.programsSection.global : [];
+                glob.forEach((g, idx) => {
+                    const card = document.createElement('div');
+                    card.className = "p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-2";
+                const scheduleVal = g.time || g.frequency || '';
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between pb-1 border-b border-white/5">
+                            <span class="text-[10px] font-bold text-violet-400 uppercase">Program #${idx + 1}</span>
+                            <button type="button" onclick="deleteGlobalProgram(${idx})" class="p-1 rounded text-zinc-500 hover:text-red-400 transition" title="Delete Program">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="global-tag-${idx}" value="${escapeHtml(g.tag || '')}" placeholder="Tag" class="w-full bg-obsidian-900 border border-white/10 rounded-lg p-1.5 text-xs text-violet-400">
+                        <input type="text" id="global-title-${idx}" value="${escapeHtml(g.title || '')}" placeholder="Title" class="w-full bg-obsidian-900 border border-white/10 rounded-lg p-1.5 text-xs text-white font-bold">
+                        <textarea id="global-desc-${idx}" rows="2" placeholder="Description" class="w-full bg-obsidian-900 border border-white/10 rounded-lg p-1.5 text-xs text-zinc-300">${escapeHtml(g.description || '')}</textarea>
+                        <input type="text" id="global-freq-${idx}" value="${escapeHtml(scheduleVal)}" placeholder="Schedule / Frequency" class="w-full bg-obsidian-900 border border-white/10 rounded-lg p-1.5 text-xs text-zinc-400 font-mono">
+                    `;
+                    globalList.appendChild(card);
+                });
+            }
+            safeCreateIcons();
+        }
+
+        function addWeeklyService() {
+            if (!blwData.programsSection) blwData.programsSection = {};
+            if (!Array.isArray(blwData.programsSection.weekly)) blwData.programsSection.weekly = [];
+            blwData.programsSection.weekly.push({
+                id: `serv-${Date.now()}`,
+                tag: "Special Service",
+                title: "New Fellowship Service",
+                time: "TBA",
+                description: "Spiritual fellowship and prayer."
+            });
+            renderProgramsAdmin();
+            showToast("Added new weekly service!");
+        }
+
+        function deleteWeeklyService(idx) {
+            if (confirm("Delete this weekly service completely?")) {
+                blwData.programsSection.weekly.splice(idx, 1);
+                renderProgramsAdmin();
+                persistData();
+                showToast("Weekly service deleted completely!");
+            }
+        }
+
+        function addGlobalProgram() {
+            if (!blwData.programsSection) blwData.programsSection = {};
+            if (!Array.isArray(blwData.programsSection.global)) blwData.programsSection.global = [];
+            blwData.programsSection.global.push({
+                id: `summit-${Date.now()}`,
+                tag: "Global Summit",
+                title: "New Global Program",
+                description: "Worldwide broadcast with Pastor Chris.",
+                frequency: "Special Broadcast"
+            });
+            renderProgramsAdmin();
+            showToast("Added new global program!");
+        }
+
+        function deleteGlobalProgram(idx) {
+            if (confirm("Delete this global program completely?")) {
+                blwData.programsSection.global.splice(idx, 1);
+                renderProgramsAdmin();
+                persistData();
+                showToast("Global program deleted completely!");
+            }
+        }
+
+        function handleSavePrograms(e) {
+            e.preventDefault();
+            if (!blwData.programsSection) blwData.programsSection = {};
+            const p = blwData.programsSection;
+            p.tag = document.getElementById('programs-sec-tag').value.trim();
+            p.title = document.getElementById('programs-sec-title').value.trim();
+            p.tabWeekly = document.getElementById('programs-tab-weekly').value.trim();
+            p.tabGlobal = document.getElementById('programs-tab-global').value.trim();
+
+            if (Array.isArray(p.weekly)) {
+                p.weekly.forEach((w, idx) => {
+                    const tag = document.getElementById(`weekly-tag-${idx}`);
+                    const title = document.getElementById(`weekly-title-${idx}`);
+                    const time = document.getElementById(`weekly-time-${idx}`);
+                    const desc = document.getElementById(`weekly-desc-${idx}`);
+                    if (tag) w.tag = tag.value.trim();
+                    if (title) w.title = title.value.trim();
+                    if (time) w.time = time.value.trim();
+                    if (desc) w.description = desc.value.trim();
+                });
+            }
+
+            if (Array.isArray(p.global)) {
+                p.global.forEach((g, idx) => {
+                    const tag = document.getElementById(`global-tag-${idx}`);
+                    const title = document.getElementById(`global-title-${idx}`);
+                    const desc = document.getElementById(`global-desc-${idx}`);
+                    const freq = document.getElementById(`global-freq-${idx}`);
+                    if (tag) g.tag = tag.value.trim();
+                    if (title) g.title = title.value.trim();
+                    if (desc) g.description = desc.value.trim();
+                    if (freq) {
+                        g.time = freq.value.trim();
+                        g.frequency = g.time;
+                    }
+                });
+            }
+
+            persistData();
+            showToast("Fellowship services & summits saved!");
+        }
+
+        // --- SECTION HEADER SAVERS ---
+        function saveMomentsHeader() {
+            if (!blwData.momentsSection) blwData.momentsSection = {};
+            blwData.momentsSection.tag = document.getElementById('moments-sec-tag').value.trim();
+            blwData.momentsSection.title = document.getElementById('moments-sec-title').value.trim();
+            blwData.momentsSection.badgeText = document.getElementById('moments-sec-badge').value.trim();
+            blwData.momentsSection.description = document.getElementById('moments-sec-desc').value.trim();
+            persistData();
+            showToast("Moments section header saved!");
+        }
+
+        function saveLeadershipHeader() {
+            if (!blwData.leadershipSection) blwData.leadershipSection = {};
+            blwData.leadershipSection.tag = document.getElementById('leadership-sec-tag').value.trim();
+            blwData.leadershipSection.title = document.getElementById('leadership-sec-title').value.trim();
+            blwData.leadershipSection.description = document.getElementById('leadership-sec-desc').value.trim();
+            persistData();
+            showToast("Leadership section header saved!");
+        }
+
+        function saveQuotesHeader() {
+            if (!blwData.quotesSection) blwData.quotesSection = {};
+            blwData.quotesSection.tag = document.getElementById('quotes-sec-tag').value.trim();
+            blwData.quotesSection.title = document.getElementById('quotes-sec-title').value.trim();
+            blwData.quotesSection.subtitle = document.getElementById('quotes-sec-sub').value.trim();
+            persistData();
+            showToast("Prophetic Words header saved!");
+        }
+
+        function saveCampusesHeader() {
+            if (!blwData.campusesSection) blwData.campusesSection = {};
+            blwData.campusesSection.tag = document.getElementById('campuses-sec-tag').value.trim();
+            blwData.campusesSection.title = document.getElementById('campuses-sec-title').value.trim();
+            blwData.campusesSection.description = document.getElementById('campuses-sec-desc').value.trim();
+            persistData();
+            showToast("Campus Directory header saved!");
+        }
+
+        // --- QUOTES EDITOR ---
+        function renderQuotes() {
+            if (!blwData || !blwData.quotesSection) return;
+            const q = blwData.quotesSection;
+            setFieldVal('quotes-sec-tag', q.tag, '');
+            setFieldVal('quotes-sec-title', q.title, '');
+            setFieldVal('quotes-sec-sub', q.subtitle, '');
+
+            const grid = document.getElementById('quotes-admin-grid');
+            grid.innerHTML = '';
+
+            (q.quotes || []).forEach(item => {
+                const card = document.createElement('div');
+                card.className = "glass-panel rounded-2xl p-5 border border-white/10 flex flex-col justify-between space-y-3";
+                card.innerHTML = `
+                    <p class="text-xs text-zinc-300 italic leading-relaxed">"${escapeHtml(item.text)}"</p>
+                    <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px]">
+                        <span class="text-amber-400 font-mono">${escapeHtml(item.author || 'Pastor Chris Oyakhilome')}</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="editQuote('${escapeHtml(item.id)}')" class="text-amber-400 hover:text-amber-300 transition" title="Edit">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                            </button>
+                            <button onclick="deleteQuote('${escapeHtml(item.id)}')" class="text-zinc-500 hover:text-red-400 transition" title="Delete">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            safeCreateIcons();
+        }
+
+        function openAddQuoteModal() {
+            document.getElementById('modal-quote-title').textContent = "Add Prophetic Teaching";
+            document.getElementById('quote-edit-id').value = "";
+            document.getElementById('quote-text-input').value = "";
+            document.getElementById('quote-author-input').value = "Pastor Chris Oyakhilome";
+            document.getElementById('quote-role-input').value = "President, Believers' LoveWorld Inc.";
+            document.getElementById('modal-quote').classList.remove('hidden');
+            document.getElementById('modal-quote').classList.add('flex');
+            safeCreateIcons();
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('modal-quote').classList.add('hidden');
+            document.getElementById('modal-quote').classList.remove('flex');
+        }
+
+        function editQuote(id) {
+            const item = (blwData.quotesSection?.quotes || []).find(q => q.id === id);
+            if (!item) return;
+            document.getElementById('modal-quote-title').textContent = "Edit Prophetic Teaching";
+            document.getElementById('quote-edit-id').value = item.id;
+            document.getElementById('quote-text-input').value = item.text || "";
+            document.getElementById('quote-author-input').value = item.author || "Pastor Chris Oyakhilome";
+            document.getElementById('quote-role-input').value = item.authorRole || "President, Believers' LoveWorld Inc.";
+            document.getElementById('modal-quote').classList.remove('hidden');
+            document.getElementById('modal-quote').classList.add('flex');
+            safeCreateIcons();
+        }
+
+        function handleSaveQuote(e) {
+            e.preventDefault();
+            if (!blwData.quotesSection) blwData.quotesSection = {};
+            if (!Array.isArray(blwData.quotesSection.quotes)) blwData.quotesSection.quotes = [];
+            const editId = document.getElementById('quote-edit-id').value;
+            const newQuote = {
+                id: editId || `quote-${Date.now()}`,
+                text: document.getElementById('quote-text-input').value.trim(),
+                author: document.getElementById('quote-author-input').value.trim(),
+                authorRole: document.getElementById('quote-role-input').value.trim()
+            };
+            if (editId) {
+                const idx = blwData.quotesSection.quotes.findIndex(q => q.id === editId);
+                if (idx !== -1) blwData.quotesSection.quotes[idx] = newQuote;
+            } else {
+                blwData.quotesSection.quotes.push(newQuote);
+            }
+            persistData();
+            closeQuoteModal();
+            renderQuotes();
+            showToast("Prophetic teaching saved!");
+        }
+
+        function deleteQuote(id) {
+            if (!confirm("Are you sure you want to remove this teaching?")) return;
+            if (!blwData.quotesSection || !Array.isArray(blwData.quotesSection.quotes)) return;
+            blwData.quotesSection.quotes = blwData.quotesSection.quotes.filter(q => q.id !== id);
+            persistData();
+            renderQuotes();
+            showToast("Teaching removed", "error");
+        }
+
+        // --- CAMPUSES EDITOR ---
+        function renderCampuses(filterText = '') {
+            const sec = blwData.campusesSection || {};
+            setFieldVal('campuses-sec-tag', sec.tag, '');
+            setFieldVal('campuses-sec-title', sec.title, '');
+            setFieldVal('campuses-sec-desc', sec.description, '');
+
+            const tbody = document.getElementById('campuses-table-body');
+            tbody.innerHTML = '';
+
+            const list = Object.entries(blwData.campuses || {});
+            const filtered = list.filter(([key, c]) => {
+                if (!filterText) return true;
+                const q = filterText.toLowerCase();
+                return (c.name || '').toLowerCase().includes(q) || (c.city || '').toLowerCase().includes(q) || key.toLowerCase().includes(q);
+            });
+
+            filtered.forEach(([key, campus]) => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-white/5 hover:bg-white/[0.02] transition";
+                tr.innerHTML = `
+                    <td class="py-4 px-6">
+                        <div class="text-white font-semibold">${escapeHtml(campus.name)}</div>
+                        <div class="text-[11px] text-zinc-400 mt-0.5">${escapeHtml(campus.city)} &bull; <span class="font-mono text-amber-400">${escapeHtml(key)}</span></div>
+                    </td>
+                    <td class="py-4 px-6 text-zinc-300 space-y-0.5">
+                        <div class="text-[11px]">${escapeHtml(campus.midweek || 'TBA')}</div>
+                        <div class="text-[11px] text-amber-300">${escapeHtml(campus.sunday || 'TBA')}</div>
+                    </td>
+                    <td class="py-4 px-6 text-zinc-300">${escapeHtml(campus.venue || 'Campus Venue')}</td>
+                    <td class="py-4 px-6">
+                        <div class="text-zinc-200 font-medium">${escapeHtml(campus.coordinator || 'Coordinator')}</div>
+                        <div class="text-[11px] font-mono text-amber-400 mt-0.5">${escapeHtml(campus.phone || '')}</div>
+                    </td>
+                    <td class="py-4 px-6 text-right space-x-1.5 whitespace-nowrap">
+                        <button onclick="editCampus('${escapeHtml(key)}')" class="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-amber-400 transition" title="Edit">
+                            <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button onclick="deleteCampus('${escapeHtml(key)}')" class="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-red-500/20 text-zinc-400 hover:text-red-400 transition" title="Delete">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            safeCreateIcons();
+        }
+
+        function filterCampusesList() {
+            renderCampuses(document.getElementById('campus-search-box').value);
+        }
+
+        // --- SETTINGS & FOOTER EDITOR ---
+        function populateSettingsForm() {
+            if (!blwData || !blwData.settings) return;
+            const s = blwData.settings;
+            setFieldVal('setting-phone', s.phone, '0772 122 967');
+            setFieldVal('setting-whatsapp', s.whatsapp, '+255 772 122 967');
+            setFieldVal('setting-floating-phone', s.floatingPhone, '+255 673 780 973');
+            setFieldVal('setting-instagram', s.instagram, 'blwtanzaniazone');
+            setFieldVal('setting-email', s.email, 'blwtanzaniazone@gmail.com');
+            setFieldVal('setting-location', s.location, 'Dar es Salaam, Tanzania');
+            setFieldVal('setting-student-pin', s.defaultStudentPin, 'BLW2026');
+            setFieldVal('setting-motto', s.motto, 'Building a happier world with love');
+            setFieldVal('setting-footer-desc', s.footerDescription, '');
+            setFieldVal('setting-copyright', s.copyright, '');
+        }
+
+        function handleSaveSettings(e) {
+            e.preventDefault();
+            if (!blwData.settings) blwData.settings = {};
+            const s = blwData.settings;
+            s.phone = document.getElementById('setting-phone').value.trim();
+            s.whatsapp = document.getElementById('setting-whatsapp').value.trim();
+            s.floatingPhone = document.getElementById('setting-floating-phone').value.trim();
+            s.floatingWhatsappLink = s.floatingPhone ? `https://wa.me/${s.floatingPhone.replace(/[^0-9]/g, '')}?text=Hi%20BLW%20Campus%20Ministry%20Tanzania%20Zone,%20I%20would%20like%20to%20connect.` : '';
+            s.instagram = document.getElementById('setting-instagram').value.trim();
+            s.instagramUrl = s.instagram ? `https://instagram.com/${s.instagram.replace('@', '')}` : '';
+            s.email = document.getElementById('setting-email').value.trim();
+            s.location = document.getElementById('setting-location').value.trim();
+            s.defaultStudentPin = document.getElementById('setting-student-pin').value.trim();
+            s.motto = document.getElementById('setting-motto').value.trim();
+            s.footerDescription = document.getElementById('setting-footer-desc').value.trim();
+            s.copyright = document.getElementById('setting-copyright').value.trim();
+
+            const newAdminPin = (document.getElementById('setting-admin-pin')?.value || '').trim();
+            if (newAdminPin) {
+                localStorage.setItem('blw_admin_pin', newAdminPin);
+                document.getElementById('setting-admin-pin').value = '';
+            }
+
+            persistData();
+            renderOverview();
+            showToast("Global contacts & footer settings saved!");
+        }
+
+        // --- MOMENT MODAL ---
+        function openAddMomentModal() {
+            document.getElementById('modal-moment-title').textContent = "Add New Event";
+            document.getElementById('moment-edit-id').value = "";
+            document.getElementById('moment-title-input').value = "";
+            document.getElementById('moment-tag-input').value = "";
+            document.getElementById('moment-location-input').value = "";
+            document.getElementById('moment-image-input').value = "";
+            document.getElementById('moment-caption-input').value = "";
+            document.getElementById('modal-moment').classList.remove('hidden');
+            document.getElementById('modal-moment').classList.add('flex');
+            safeCreateIcons();
+        }
+        function closeMomentModal() {
+            document.getElementById('modal-moment').classList.add('hidden');
+            document.getElementById('modal-moment').classList.remove('flex');
+        }
+        function editMoment(id) {
+            const item = blwData.moments.find(m => m.id === id);
+            if (!item) return;
+            document.getElementById('modal-moment-title').textContent = "Edit Event Details";
+            document.getElementById('moment-edit-id').value = item.id;
+            document.getElementById('moment-title-input').value = item.title;
+            document.getElementById('moment-tag-input').value = item.tagLabel || item.category;
+            document.getElementById('moment-location-input').value = item.location;
+            document.getElementById('moment-image-input').value = item.image;
+            document.getElementById('moment-caption-input').value = item.caption;
+            document.getElementById('modal-moment').classList.remove('hidden');
+            document.getElementById('modal-moment').classList.add('flex');
+            safeCreateIcons();
+        }
+        function handleSaveMoment(e) {
+            e.preventDefault();
+            const editId = document.getElementById('moment-edit-id').value;
+            const newMoment = {
+                id: editId || `event-${Date.now()}`,
+                title: document.getElementById('moment-title-input').value.trim(),
+                category: document.getElementById('moment-tag-input').value.trim().toLowerCase().replace(/\s+/g, '-'),
+                tagLabel: document.getElementById('moment-tag-input').value.trim(),
+                location: document.getElementById('moment-location-input').value.trim(),
+                image: document.getElementById('moment-image-input').value.trim(),
+                caption: document.getElementById('moment-caption-input').value.trim()
+            };
+            if (editId) {
+                const idx = blwData.moments.findIndex(m => m.id === editId);
+                if (idx !== -1) blwData.moments[idx] = newMoment;
+            } else {
+                blwData.moments.push(newMoment);
+            }
+            persistData();
+            closeMomentModal();
+            renderMoments();
+            renderOverview();
+            showToast("Event saved!");
+        }
+        function deleteMoment(id) {
+            if (!confirm("Are you sure you want to remove this event archive?")) return;
+            blwData.moments = blwData.moments.filter(m => m.id !== id);
+            persistData();
+            renderMoments();
+            renderOverview();
+            showToast("Event removed", "error");
+        }
+
+        // --- CAMPUS MODAL ---
+        function openAddCampusModal() {
+            document.getElementById('modal-campus-title').textContent = "Add New Campus Chapter";
+            document.getElementById('campus-edit-key').value = "";
+            document.getElementById('campus-name-input').value = "";
+            document.getElementById('campus-city-input').value = "";
+            document.getElementById('campus-tag-input').value = "";
+            document.getElementById('campus-midweek-input').value = "Wednesdays: 5:00 PM - 7:00 PM";
+            document.getElementById('campus-sunday-input').value = "Sundays: 9:00 AM - 11:30 AM";
+            document.getElementById('campus-venue-input').value = "";
+            document.getElementById('campus-coordinator-input').value = "";
+            document.getElementById('campus-phone-input').value = "+255";
+            document.getElementById('modal-campus').classList.remove('hidden');
+            document.getElementById('modal-campus').classList.add('flex');
+            safeCreateIcons();
+        }
+        function closeCampusModal() {
+            document.getElementById('modal-campus').classList.add('hidden');
+            document.getElementById('modal-campus').classList.remove('flex');
+        }
+        function editCampus(key) {
+            const c = blwData.campuses[key];
+            if (!c) return;
+            document.getElementById('modal-campus-title').textContent = `Edit ${c.name}`;
+            document.getElementById('campus-edit-key').value = key;
+            document.getElementById('campus-name-input').value = c.name;
+            document.getElementById('campus-city-input').value = c.city;
+            document.getElementById('campus-tag-input').value = c.tag || '';
+            document.getElementById('campus-midweek-input').value = c.midweek;
+            document.getElementById('campus-sunday-input').value = c.sunday;
+            document.getElementById('campus-venue-input').value = c.venue;
+            document.getElementById('campus-coordinator-input').value = c.coordinator;
+            document.getElementById('campus-phone-input').value = c.phone;
+            document.getElementById('modal-campus').classList.remove('hidden');
+            document.getElementById('modal-campus').classList.add('flex');
+            safeCreateIcons();
+        }
+        function handleSaveCampus(e) {
+            e.preventDefault();
+            const editKey = document.getElementById('campus-edit-key').value;
+            const name = document.getElementById('campus-name-input').value.trim();
+            const slug = editKey || name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 10);
+            blwData.campuses[slug] = {
+                name: name,
+                city: document.getElementById('campus-city-input').value.trim(),
+                tag: document.getElementById('campus-tag-input').value.trim(),
+                midweek: document.getElementById('campus-midweek-input').value.trim(),
+                sunday: document.getElementById('campus-sunday-input').value.trim(),
+                venue: document.getElementById('campus-venue-input').value.trim(),
+                coordinator: document.getElementById('campus-coordinator-input').value.trim(),
+                phone: document.getElementById('campus-phone-input').value.trim()
+            };
+            persistData();
+            closeCampusModal();
+            renderCampuses();
+            renderOverview();
+            showToast("Campus chapter saved!");
+        }
+        function deleteCampus(key) {
+            const c = blwData.campuses[key];
+            if (!confirm(`Are you sure you want to remove ${c ? c.name : 'this campus'}?`)) return;
+            delete blwData.campuses[key];
+            persistData();
+            renderCampuses();
+            renderOverview();
+            showToast("Campus removed", "error");
+        }
+
+        // --- LEADER MODAL ---
+        function openAddLeaderModal() {
+            document.getElementById('modal-leader-title').textContent = "Add Ministry Leader";
+            document.getElementById('leader-edit-id').value = "";
+            document.getElementById('leader-name-input').value = "";
+            document.getElementById('leader-title-input').value = "";
+            document.getElementById('leader-region-input').value = "";
+            document.getElementById('leader-image-input').value = "";
+            document.getElementById('leader-bio-input').value = "";
+            document.getElementById('modal-leader').classList.remove('hidden');
+            document.getElementById('modal-leader').classList.add('flex');
+            safeCreateIcons();
+        }
+        function closeLeaderModal() {
+            document.getElementById('modal-leader').classList.add('hidden');
+            document.getElementById('modal-leader').classList.remove('flex');
+        }
+        function editLeader(id) {
+            const leader = (blwData.leadership || []).find(l => l.id === id);
+            if (!leader) return;
+            document.getElementById('modal-leader-title').textContent = "Edit Leader Details";
+            document.getElementById('leader-edit-id').value = leader.id;
+            document.getElementById('leader-name-input').value = leader.name;
+            document.getElementById('leader-title-input').value = leader.title;
+            document.getElementById('leader-region-input').value = leader.region;
+            document.getElementById('leader-image-input').value = leader.image;
+            document.getElementById('leader-bio-input').value = leader.bio;
+            document.getElementById('modal-leader').classList.remove('hidden');
+            document.getElementById('modal-leader').classList.add('flex');
+            safeCreateIcons();
+        }
+        function handleSaveLeader(e) {
+            e.preventDefault();
+            const editId = document.getElementById('leader-edit-id').value;
+            const newLeader = {
+                id: editId || `leader-${Date.now()}`,
+                name: document.getElementById('leader-name-input').value.trim(),
+                title: document.getElementById('leader-title-input').value.trim(),
+                region: document.getElementById('leader-region-input').value.trim(),
+                tag: "Ministry Leadership",
+                image: document.getElementById('leader-image-input').value.trim(),
+                bio: document.getElementById('leader-bio-input').value.trim()
+            };
+            if (editId) {
+                const idx = blwData.leadership.findIndex(l => l.id === editId);
+                if (idx !== -1) blwData.leadership[idx] = newLeader;
+            } else {
+                blwData.leadership.push(newLeader);
+            }
+            persistData();
+            closeLeaderModal();
+            renderLeadership();
+            showToast("Leadership record updated!");
+        }
+        function deleteLeader(id) {
+            if (!confirm("Are you sure you want to remove this leader profile?")) return;
+            blwData.leadership = blwData.leadership.filter(l => l.id !== id);
+            persistData();
+            renderLeadership();
+            showToast("Leader removed", "error");
+        }
+
+        // --- PERSISTENCE & API ---
+        function persistData() {
+            localStorage.setItem('blw_campus_data', JSON.stringify(blwData));
+        }
+
+        async function saveAndPublishData() {
+            const btn = document.getElementById('publish-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> <span>Publishing...</span>`;
+            safeCreateIcons();
+
+            persistData();
+
+            try {
+                const res = await fetch('api.php?action=blw_save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'tzion' },
+                    body: JSON.stringify({ data: blwData })
+                });
+
+                if (res.ok) {
+                    showToast("Published live to server & blw-data.json successfully!");
+                } else {
+                    showToast("Saved locally in browser (Live on this device)");
+                }
+            } catch (err) {
+                showToast("Saved to local storage (Offline mode active)");
+            } finally {
+                btn.innerHTML = originalText;
+                safeCreateIcons();
+            }
+        }
+
+        function downloadJsonBackup(customFilename = null) {
+            const str = JSON.stringify(blwData, null, 2);
+            const blob = new Blob([str], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = customFilename || `blw-tanzania-zone-complete-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(customFilename ? `${customFilename} exported!` : "Complete backup JSON downloaded!");
+        }
+
+        function handleImportJson(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const parsed = JSON.parse(event.target.result);
+                    if (parsed.campuses && parsed.moments) {
+                        blwData = parsed;
+                        persistData();
+                        initAdminApp();
+                        showToast("Complete backup restored!");
+                    } else {
+                        showToast("Invalid BLW backup structure", "error");
+                    }
+                } catch(e) {
+                    showToast("Corrupted JSON file", "error");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        async function resetToOfficialDefaults() {
+            if (!confirm("Are you sure you want to reset everything back to official Tanzanian defaults?")) return;
+            try {
+                const res = await fetch('blw-data.json');
+                if (res.ok) {
+                    blwData = await res.json();
+                    persistData();
+                    initAdminApp();
+                    showToast("Reset to official defaults complete!");
+                    return;
+                }
+            } catch(e){}
+            localStorage.removeItem('blw_campus_data');
+            await loadBlwData();
+            initAdminApp();
+            showToast("Reset complete!");
+        }
+
+        async function initAdminApp() {
+            await loadBlwData();
+            renderOverview();
+            populateHeroForm();
+            renderMoments();
+            populateMandateForm();
+            renderLeadership();
+            populatePrinciplesForm();
+            populateProgramsForm();
+            renderQuotes();
+            renderCampuses();
+            populateSettingsForm();
+            safeCreateIcons();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('blw_authenticated') === 'true') {
+                unlockAdminPortal();
+            } else {
+                safeCreateIcons();
+            }
+        });
+    </script>
+</body>
+</html>

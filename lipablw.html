@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLW Tanzania Zone - Give / Partner</title>
+  <link rel="icon" type="image/png" href="gallery/blw logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- QR code library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(135deg, #fdfbf7 0%, #f4ece1 100%);
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 16px;
+    }
+    .card {
+      max-width: 480px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 25px 50px -12px rgba(139, 69, 19, 0.2);
+      padding: 32px 28px;
+      transition: all 0.2s ease;
+      border: 2px solid #e6c88a;
+      text-align: center;
+    }
+    .logo-placeholder {
+      width: 80px;
+      height: 80px;
+      background: #f8f5f0;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      font-size: 2rem;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #4a2c2a;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .subhead {
+      color: #8b5a2b;
+      font-size: 1rem;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+    .qr-wrapper {
+      background: #fff9f0;
+      padding: 20px;
+      border-radius: 28px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      border: 1px dashed #d4af37;
+    }
+    #qrcode {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    #qrcode img {
+      display: block;
+      width: 200px;
+      height: 200px;
+    }
+    .lipa-box {
+      background: linear-gradient(145deg, #8b1c1b 0%, #b93b3a 100%);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 24px;
+      color: white;
+      box-shadow: 0 10px 20px -5px rgba(139, 28, 27, 0.4);
+    }
+    .lipa-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      opacity: 0.9;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .lipa-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 8px;
+    }
+    .lipa-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.2);
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+    .copy-btn {
+      background: #d4af37;
+      border: none;
+      color: #3b1c1a;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 16px 20px;
+      width: 100%;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 8px 18px -6px rgba(212, 175, 55, 0.6);
+      letter-spacing: 0.2px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .copy-btn:hover {
+      background: #e5c158;
+    }
+    .copy-btn:active {
+      transform: scale(0.98);
+    }
+    .copy-btn i {
+      font-size: 1.2rem;
+    }
+    .status-toast {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #1e7e34;
+      font-weight: 600;
+      margin-top: 12px;
+      min-height: 1.4rem;
+      transition: opacity 0.2s;
+    }
+    .four-ways {
+      margin-top: 24px;
+      text-align: left;
+      background: #fdfbf7;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid #f0e6d6;
+    }
+    .four-ways h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8b5a2b;
+      margin-bottom: 12px;
+      text-align: center;
+      border-bottom: 1px solid #e6c88a;
+      padding-bottom: 8px;
+    }
+    .four-ways ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .four-ways li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #4a2c2a;
+      font-weight: 500;
+    }
+    .four-ways li i {
+      color: #b93b3a;
+      width: 18px;
+      text-align: center;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      color: #8b5a2b;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .back-link:hover {
+      color: #4a2c2a;
+    }
+    @keyframes goldShimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes preloaderSweep {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #081428;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      transition: opacity 0.5s ease;
+    }
+    .preloader.is-done {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .preloader-gold-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 4vw, 2.25rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #B87B14 0%, #F3CA7A 25%, #FFF6D6 50%, #F3CA7A 75%, #D99B26 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: goldShimmer 2s linear infinite;
+    }
+    .preloader-track {
+      margin-top: 18px;
+      width: 190px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+    .preloader-bar {
+      width: 50%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #F3CA7A, #D99B26, transparent);
+      animation: preloaderSweep 1.1s ease-in-out infinite;
+    }
+    .card {
+      animation: cardEnter 0.7s ease both;
+    }
+  </style>
+</head>
+<body>
+<div id="page-preloader" class="preloader">
+  <img src="gallery/blw logo.png" alt="BLW Logo" style="width: 64px; height: 64px; object-fit: contain; margin-bottom: 18px;">
+  <div class="preloader-gold-text">BLW TANZANIA ZONE</div>
+  <div class="preloader-track"><div class="preloader-bar"></div></div>
+</div>
+<div class="card">
+  
+  <!-- BLW Logo -->
+  <div class="logo-placeholder" style="overflow: hidden; padding: 6px; background: #0d0f17;">
+    <img src="gallery/blw logo.png" alt="BLW Tanzania Zone Logo" style="width: 100%; height: 100%; object-fit: contain;">
+  </div>
+
+  <h1>BLW TANZANIA ZONE</h1>
+  <div class="subhead">Partner With Us in advancing God's Kingdom</div>
+
+  <!-- QR Code Container -->
+  <div class="qr-wrapper">
+    <div id="qrcode"></div>
+  </div>
+
+  <!-- Payment Details Block -->
+  <div class="lipa-box">
+    <div class="lipa-label"><i class="fa-solid fa-mobile-screen-button"></i> MPESA LIPA</div>
+    <div class="lipa-number" id="lipaNumber">358878966</div>
+    <div class="lipa-name">LIPA BLW TANZANIA ZONE</div>
+  </div>
+
+  <!-- Copy Button -->
+  <button class="copy-btn" id="copyButton">
+    <i class="fa-regular fa-copy"></i> Copy Lipa Namba
+  </button>
+  <div class="status-toast" id="toastMessage"></div>
+
+  <!-- Four Ways to Give (Just for context, as per the image) -->
+  <div class="four-ways">
+    <h4>Four Ways to Give</h4>
+    <ul>
+      <li><i class="fa-solid fa-hand-holding-dollar"></i> Tithe</li>
+      <li><i class="fa-solid fa-seedling"></i> Seed</li>
+      <li><i class="fa-solid fa-handshake"></i> Partnership</li>
+      <li><i class="fa-solid fa-hand-holding-heart"></i> Offerings</li>
+    </ul>
+  </div>
+
+  <a href="blw_campus_ministry_tanzania_zone.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i> Back to BLW Campus Ministry Site
+  </a>
+
+</div>
+
+<script>
+  (function() {
+    const preloader = document.getElementById('page-preloader');
+    if (preloader) {
+      const hide = () => {
+        if (preloader.classList.contains('is-done')) return;
+        preloader.classList.add('is-done');
+        setTimeout(() => { preloader.style.display = 'none'; }, 550);
+      };
+      window.addEventListener('load', () => setTimeout(hide, 450));
+      setTimeout(hide, 1800);
+    }
+    // The specific number to copy and encode in the QR code
+    const lipaNumber = "358878966";
+
+    // ----- 1. Generate QR Code -----
+    // The QR code will just contain the Lipa number so scanning it shows the number
+    const qrContainer = document.getElementById('qrcode');
+    
+    QRCode.toDataURL(lipaNumber, {
+      width: 240,
+      margin: 1,
+      color: {
+        dark: '#4a2c2a', // Dark brown to match theme
+        light: '#ffffff'
+      },
+      errorCorrectionLevel: 'H'
+    }, function (err, url) {
+      if (err) {
+        console.error('QR generation error:', err);
+        qrContainer.innerHTML = '<p style="color:red; font-size: 0.8rem;">⚠️ QR Error</p>';
+        return;
+      }
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'QR Code for Lipa Number 358878966';
+      qrContainer.innerHTML = '';
+      qrContainer.appendChild(img);
+    });
+
+    // ----- 2. Copy Functionality -----
+    const copyBtn = document.getElementById('copyButton');
+    const toastEl = document.getElementById('toastMessage');
+
+    const copyToClipboard = async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          return true;
+        } catch (e) {
+          document.body.removeChild(textarea);
+          return false;
+        }
+      }
+    };
+
+    copyBtn.addEventListener('click', async () => {
+      const success = await copyToClipboard(lipaNumber);
+
+      if (success) {
+        toastEl.textContent = '✅ Lipa Namba copied!';
+        toastEl.style.color = '#1e7e34';
+      } else {
+        toastEl.textContent = '❌ Copy failed. Please manually select the number.';
+        toastEl.style.color = '#b02a37';
+      }
+
+      // Clear message after 2.5 seconds
+      setTimeout(() => {
+        toastEl.textContent = '';
+      }, 2500);
+    });
+  })();
+</script>
+</body>
+</html>
