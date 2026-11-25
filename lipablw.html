@@ -92,7 +92,7 @@
 
   <!-- Golden BLW TANZANIA ZONE Preloader -->
   <div id="page-preloader" class="preloader">
-    <img src="gallery/blw logo.png" alt="BLW Logo" class="w-16 h-16 object-contain mb-4 animate-pulse">
+    <img src="gallery/blw logo.png" alt="BLW Logo" class="w-24 h-24 sm:w-28 sm:h-28 object-contain mb-4 animate-pulse">
     <div class="preloader-gold-text">BLW TANZANIA ZONE</div>
     <div class="preloader-track"><div class="preloader-bar"></div></div>
   </div>
@@ -100,9 +100,9 @@
   <!-- Consistent Clean Header (3 Visible Links + Hamburger) -->
   <header class="sticky top-0 z-50 shadow-sm">
     <nav class="bg-white/95 backdrop-blur-md border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between py-3 gap-4">
-        <a href="index.html" class="flex items-center gap-3 group shrink-0">
-          <div class="w-11 h-11 rounded-xl bg-[#0B1D3A] p-1.5 flex items-center justify-center shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between py-2.5 gap-4">
+        <a href="index.html" class="flex items-center gap-3.5 group shrink-0">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#0B1D3A] p-1 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
             <img src="gallery/blw logo.png" alt="BLW Campus Ministry Logo" class="w-full h-full object-contain">
           </div>
           <div>
@@ -152,7 +152,7 @@
       <!-- Top Navy & Gold Banner Inside Card -->
       <div class="bg-[#0B1D3A] text-white px-6 py-8 text-center relative overflow-hidden">
         <div class="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-[#D99B26]/15 blur-2xl pointer-events-none"></div>
-        <div class="w-18 h-18 w-[76px] h-[76px] mx-auto mb-4 rounded-2xl bg-white/10 border-2 border-[#D99B26] p-2 flex items-center justify-center shadow-lg">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 rounded-2xl bg-white/10 border-2 border-[#D99B26] p-1.5 flex items-center justify-center shadow-lg">
           <img src="gallery/blw logo.png" alt="BLW Tanzania Zone Logo" class="w-full h-full object-contain">
         </div>
         <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">BLW TANZANIA ZONE</h1>
@@ -226,7 +226,7 @@
   <footer class="bg-[#081428] text-slate-300 py-8 px-5 sm:px-8 border-t border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
       <div class="flex items-center gap-3">
-        <img src="gallery/blw logo.png" alt="BLW Logo" class="w-8 h-8 object-contain">
+        <img src="gallery/blw logo.png" alt="BLW Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain">
         <span>© 2026 BLW Campus Ministry — Tanzania Zone. All Rights Reserved.</span>
       </div>
       <div class="flex items-center gap-5">
@@ -238,11 +238,36 @@
     </div>
   </footer>
 
+  <!-- Floating Back to Top / First Page Controls -->
+  <div id="scroll-actions" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 opacity-0 translate-y-4 pointer-events-none transition-all duration-300">
+    <a href="index.html" class="px-3.5 py-2.5 rounded-full bg-white hover:bg-slate-100 text-[#0B1D3A] border border-slate-200 shadow-xl text-xs font-bold flex items-center gap-1.5 transition" title="Return to Main Page">
+      <i data-lucide="home" class="w-4 h-4 text-[#D99B26]"></i>
+      <span>Home</span>
+    </a>
+    <button id="back-to-top-btn" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="px-4 py-2.5 rounded-full bg-[#0B1D3A] hover:bg-[#122A52] text-[#F3CA7A] border border-[#D99B26]/60 shadow-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer" aria-label="Scroll back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+      <span>Top</span>
+    </button>
+  </div>
+
   <script>
     (function() {
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }
+
+      (function initScrollActions() {
+        const box = document.getElementById('scroll-actions');
+        if (!box) return;
+        const toggle = () => {
+          const show = (window.scrollY || document.documentElement.scrollTop) > 220;
+          box.classList.toggle('opacity-0', !show);
+          box.classList.toggle('translate-y-4', !show);
+          box.classList.toggle('pointer-events-none', !show);
+        };
+        window.addEventListener('scroll', toggle, { passive: true });
+        toggle();
+      })();
 
       document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
         document.getElementById('mobile-drawer')?.classList.toggle('hidden');
