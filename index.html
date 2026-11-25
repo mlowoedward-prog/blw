@@ -129,7 +129,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Top Header Page Links Highlight Effect */
+        /* Top Header Page Links Highlight Effect (Hover & Press Only) */
         .nav-link-highlight {
             position: relative;
             padding: 0.42rem 0.85rem;
@@ -149,22 +149,28 @@
             background: linear-gradient(90deg, #D99B26, #F3CA7A);
             transform: scaleX(0);
             transform-origin: center;
-            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .nav-link-highlight:hover {
+        @media (hover: hover) {
+            .nav-link-highlight:hover {
+                color: #0B1D3A;
+                background-color: rgba(217, 155, 38, 0.12);
+                transform: translateY(-1px);
+            }
+            .nav-link-highlight:hover::after {
+                transform: scaleX(1);
+            }
+        }
+        .nav-link-highlight:active,
+        .nav-link-highlight:focus-visible {
             color: #0B1D3A;
-            background-color: rgba(217, 155, 38, 0.11);
-            transform: translateY(-1px);
+            background-color: rgba(217, 155, 38, 0.16);
+            box-shadow: inset 0 0 0 1px rgba(217, 155, 38, 0.4);
+            outline: none;
         }
-        .nav-link-highlight:hover::after,
-        .nav-link-highlight.nav-link-active::after {
+        .nav-link-highlight:active::after,
+        .nav-link-highlight:focus-visible::after {
             transform: scaleX(1);
-        }
-        .nav-link-highlight.nav-link-active {
-            color: #0B1D3A;
-            font-weight: 700;
-            background-color: rgba(217, 155, 38, 0.14);
-            box-shadow: inset 0 0 0 1px rgba(217, 155, 38, 0.35);
         }
 
         /* Hero Section Entrance & Ambient Blue Motion */
@@ -270,7 +276,7 @@
                     <div class="flex items-center gap-3 sm:gap-4">
                         <!-- Visible 3 Links (Home, Moments & Events, Partner) -->
                         <div class="hidden sm:flex items-center gap-2.5">
-                            <a id="nav-link-home" href="#hero" class="nav-link-highlight nav-link-active text-xs sm:text-sm">
+                            <a id="nav-link-home" href="#hero" class="nav-link-highlight text-xs sm:text-sm">
                                 Home
                             </a>
                             <a id="nav-link-moments" href="#moments" class="nav-link-highlight text-xs sm:text-sm">
@@ -1231,18 +1237,7 @@
     <script>
         lucide.createIcons();
 
-        // 1. Scroll Progress + Active Top Nav Highlight
-        function syncTopNavHighlight() {
-            const homeLink = document.getElementById('nav-link-home');
-            const momentsLink = document.getElementById('nav-link-moments');
-            const momentsSec = document.getElementById('moments');
-            if (!homeLink || !momentsLink || !momentsSec) return;
-            const rect = momentsSec.getBoundingClientRect();
-            const inMoments = rect.top <= 160 && rect.bottom > 120;
-            homeLink.classList.toggle('nav-link-active', !inMoments);
-            momentsLink.classList.toggle('nav-link-active', inMoments);
-        }
-
+        // 1. Scroll Progress
         window.addEventListener('scroll', () => {
             const doc = document.documentElement;
             const top = doc.scrollTop || document.body.scrollTop;
@@ -1250,10 +1245,7 @@
             const progress = height > 0 ? (top / height) * 100 : 0;
             const bar = document.getElementById('scroll-progress');
             if (bar) bar.style.width = progress + '%';
-            syncTopNavHighlight();
         }, { passive: true });
-        window.addEventListener('hashchange', syncTopNavHighlight);
-        syncTopNavHighlight();
 
         // 2. Hamburger Menu Toggle
         const mobileBtn = document.getElementById('mobile-menu-toggle');
