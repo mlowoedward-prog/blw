@@ -30,6 +30,10 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .nav-link-highlight { position: relative; padding: 0.42rem 0.85rem; border-radius: 0.65rem; color: #475569; font-weight: 600; transition: color 0.25s ease, background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease; }
+    .nav-link-highlight::after { content: ''; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.2rem; height: 2.5px; border-radius: 9999px; background: linear-gradient(90deg, #D99B26, #F3CA7A); transform: scaleX(0); transform-origin: center; transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    .nav-link-highlight:hover { color: #0B1D3A; background-color: rgba(217, 155, 38, 0.11); transform: translateY(-1px); }
+    .nav-link-highlight:hover::after { transform: scaleX(1); }
     .preloader {
       position: fixed;
       inset: 0;
@@ -105,11 +109,11 @@
             <p class="text-[11px] text-slate-500 font-medium">Believers' Loveworld Inc.</p>
           </div>
         </a>
-        <div class="flex items-center gap-3 sm:gap-6">
-          <div class="hidden sm:flex items-center gap-6">
-            <a href="index.html" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#0B1D3A] transition">Home</a>
-            <a href="index.html#moments" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#0B1D3A] transition">Moments &amp; Events</a>
-            <a href="lipablw.html" class="px-4 py-2 rounded-lg bg-[#D99B26] hover:bg-[#c58a1c] text-white font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-1.5">
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="hidden sm:flex items-center gap-2.5">
+            <a href="index.html" class="nav-link-highlight text-xs sm:text-sm">Home</a>
+            <a href="index.html#moments" class="nav-link-highlight text-xs sm:text-sm">Moments &amp; Events</a>
+            <a href="lipablw.html" class="ml-1 px-4 py-2 rounded-lg bg-[#D99B26] hover:bg-[#c58a1c] text-white font-bold text-xs sm:text-sm shadow-[0_0_16px_rgba(217,155,38,0.45)] ring-2 ring-[#F3CA7A] ring-offset-2 transition-all duration-300 flex items-center gap-1.5">
               <i data-lucide="heart-handshake" class="w-4 h-4"></i>
               <span>Partner</span>
             </a>

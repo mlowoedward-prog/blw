@@ -129,6 +129,97 @@
             -webkit-text-fill-color: transparent;
         }
 
+        /* Top Header Page Links Highlight Effect */
+        .nav-link-highlight {
+            position: relative;
+            padding: 0.42rem 0.85rem;
+            border-radius: 0.65rem;
+            color: #475569;
+            font-weight: 600;
+            transition: color 0.25s ease, background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+        }
+        .nav-link-highlight::after {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            right: 0.75rem;
+            bottom: 0.2rem;
+            height: 2.5px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #D99B26, #F3CA7A);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-link-highlight:hover {
+            color: #0B1D3A;
+            background-color: rgba(217, 155, 38, 0.11);
+            transform: translateY(-1px);
+        }
+        .nav-link-highlight:hover::after,
+        .nav-link-highlight.nav-link-active::after {
+            transform: scaleX(1);
+        }
+        .nav-link-highlight.nav-link-active {
+            color: #0B1D3A;
+            font-weight: 700;
+            background-color: rgba(217, 155, 38, 0.14);
+            box-shadow: inset 0 0 0 1px rgba(217, 155, 38, 0.35);
+        }
+
+        /* Hero Section Entrance & Ambient Blue Motion */
+        @keyframes heroGradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes heroOrbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-24px, 18px) scale(1.08); }
+        }
+        @keyframes heroOrbFloatAlt {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(26px, -16px) scale(1.06); }
+        }
+        @keyframes heroFadeUp {
+            0% { opacity: 0; transform: translateY(24px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroCardEnter {
+            0% { opacity: 0; transform: translateY(28px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes heroBadgePulse {
+            0%, 100% { box-shadow: 0 8px 20px rgba(217, 155, 38, 0.35); transform: translate(-50%, 0); }
+            50% { box-shadow: 0 10px 28px rgba(243, 202, 122, 0.65); transform: translate(-50%, -3px); }
+        }
+        .hero-animated-bg {
+            background-size: 180% 180%;
+            animation: heroGradientFlow 12s ease-in-out infinite;
+        }
+        .hero-orb-1 { animation: heroOrbFloat 11s ease-in-out infinite; }
+        .hero-orb-2 { animation: heroOrbFloatAlt 13s ease-in-out infinite; }
+        .hero-anim-1 { animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+        .hero-anim-2 { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both; }
+        .hero-anim-3 { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both; }
+        .hero-anim-4 { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both; }
+        .hero-anim-5 { animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.54s both; }
+        .hero-card-anim { animation: heroCardEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+        .hero-badge-pulse { animation: heroBadgePulse 3.2s ease-in-out infinite; }
+        .hero-gold-shimmer {
+            background: linear-gradient(90deg, #F3CA7A 0%, #FFF3C4 35%, #F3CA7A 65%, #E5AE44 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShimmer 4s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-animated-bg, .hero-orb-1, .hero-orb-2, .hero-anim-1, .hero-anim-2, .hero-anim-3, .hero-anim-4, .hero-anim-5, .hero-card-anim, .hero-badge-pulse, .hero-gold-shimmer {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 7px; }
         ::-webkit-scrollbar-track { background: #F1F5F9; }
@@ -176,16 +267,16 @@
                     </a>
 
                     <!-- 3 Header Links + Always-Available Hamburger Menu -->
-                    <div class="flex items-center gap-3 sm:gap-6">
+                    <div class="flex items-center gap-3 sm:gap-4">
                         <!-- Visible 3 Links (Home, Moments & Events, Partner) -->
-                        <div class="hidden sm:flex items-center gap-6">
-                            <a href="#hero" class="text-xs sm:text-sm font-semibold text-[#0B1D3A] hover:text-[#D99B26] border-b-2 border-[#D99B26] pb-0.5 transition">
+                        <div class="hidden sm:flex items-center gap-2.5">
+                            <a id="nav-link-home" href="#hero" class="nav-link-highlight nav-link-active text-xs sm:text-sm">
                                 Home
                             </a>
-                            <a href="#moments" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#0B1D3A] transition">
+                            <a id="nav-link-moments" href="#moments" class="nav-link-highlight text-xs sm:text-sm">
                                 Moments &amp; Events
                             </a>
-                            <a href="lipablw.html" class="px-4 py-2 rounded-lg bg-[#D99B26] hover:bg-[#c58a1c] text-white font-bold text-xs sm:text-sm shadow-sm hover:shadow transition flex items-center gap-1.5">
+                            <a href="lipablw.html" class="ml-1 px-4 py-2 rounded-lg bg-[#D99B26] hover:bg-[#c58a1c] text-white font-bold text-xs sm:text-sm shadow-sm hover:shadow-[0_0_20px_rgba(217,155,38,0.45)] hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-1.5">
                                 <i data-lucide="heart-handshake" class="w-4 h-4"></i>
                                 <span>Partner</span>
                             </a>
@@ -255,9 +346,9 @@
     <!-- ============================================================ -->
     <!-- HERO SECTION (Rich Blue Gradient + Enlarged Typography)      -->
     <!-- ============================================================ -->
-    <header id="hero" class="relative overflow-hidden bg-gradient-to-br from-[#071633] via-[#0F2F66] to-[#1B4EA3] text-white">
-        <div class="pointer-events-none absolute -top-28 -right-24 w-[34rem] h-[34rem] rounded-full bg-[#2E74E6]/25 blur-3xl"></div>
-        <div class="pointer-events-none absolute -bottom-24 left-1/4 w-[28rem] h-[28rem] rounded-full bg-[#1E54B3]/25 blur-3xl"></div>
+    <header id="hero" class="hero-animated-bg relative overflow-hidden bg-gradient-to-br from-[#071633] via-[#0F2F66] to-[#1B4EA3] text-white">
+        <div class="hero-orb-1 pointer-events-none absolute -top-28 -right-24 w-[34rem] h-[34rem] rounded-full bg-[#2E74E6]/30 blur-3xl"></div>
+        <div class="hero-orb-2 pointer-events-none absolute -bottom-24 left-1/4 w-[28rem] h-[28rem] rounded-full bg-[#1E54B3]/30 blur-3xl"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-28 md:pt-24 md:pb-32">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -266,7 +357,7 @@
                 <div class="lg:col-span-8 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
 
                     <!-- Zone Pill -->
-                    <div id="cms-hero-pill-container" class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 border border-white/25 text-xs sm:text-sm font-medium text-slate-100 backdrop-blur">
+                    <div id="cms-hero-pill-container" class="hero-anim-1 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 border border-white/25 text-xs sm:text-sm font-medium text-slate-100 backdrop-blur">
                         <img id="cms-hero-pill-logo" src="gallery/blw logo.png" alt="BLW" class="w-4 h-4 sm:w-5 sm:h-5 object-contain">
                         <span id="cms-hero-pill-tag" class="text-amber-300 font-bold tracking-wider text-xs sm:text-sm">TANZANIA ZONE</span>
                         <span id="cms-hero-pill-sep" class="text-white/40">/</span>
@@ -274,13 +365,13 @@
                     </div>
 
                     <!-- Main Editorial Serif Headline -->
-                    <h1 id="cms-hero-headline" class="font-editorial text-4xl sm:text-6xl md:text-7xl xl:text-[5rem] font-extrabold tracking-tight text-white leading-[1.06]">
+                    <h1 id="cms-hero-headline" class="hero-anim-2 font-editorial text-4xl sm:text-6xl md:text-7xl xl:text-[5rem] font-extrabold tracking-tight text-white leading-[1.06]">
                         <span id="cms-hero-headline-prefix">WELCOME TO BLW CAMPUS MINISTRY</span> <br id="cms-hero-headline-br" class="hidden sm:inline">
-                        <span id="cms-hero-headline-highlight" class="text-[#F3CA7A]">TANZANIA ZONE</span>
+                        <span id="cms-hero-headline-highlight" class="hero-gold-shimmer">TANZANIA ZONE</span>
                     </h1>
 
                     <!-- Mottos -->
-                    <div id="cms-hero-mottos-container" class="space-y-1.5">
+                    <div id="cms-hero-mottos-container" class="hero-anim-3 space-y-1.5">
                         <p id="cms-hero-motto1" class="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide text-slate-100">
                             GIVING YOUR LIFE A MEANING
                         </p>
@@ -289,12 +380,12 @@
                         </p>
                     </div>
 
-                    <p id="cms-hero-description" class="text-base sm:text-lg md:text-xl text-slate-100/95 max-w-2xl leading-relaxed font-medium">
+                    <p id="cms-hero-description" class="hero-anim-4 text-base sm:text-lg md:text-xl text-slate-100/95 max-w-2xl leading-relaxed font-medium">
                         Believers’ LoveWorld (BLW) Campus Ministry is the vibrant arm of Christ Embassy Church under our Dear Man of God, Pastor Chris Oyakhilome.
                     </p>
 
                     <!-- Action Buttons (Gold Filled + Crisp Outlined) -->
-                    <div id="cms-hero-cta-container" class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                    <div id="cms-hero-cta-container" class="hero-anim-5 flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
                         <a id="cms-hero-cta1-btn" href="#campuses" class="px-7 py-4 rounded-xl bg-[#D99B26] hover:bg-[#c58a1c] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg shadow-black/25 hover:scale-[1.02] transition-all flex items-center gap-2">
                             <span id="cms-hero-cta1">Connect To Your University</span>
                             <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5"></i>
@@ -307,10 +398,10 @@
                 </div>
 
                 <!-- Right Column: Floating White Spotlight Card (Reference UI Style) -->
-                <div id="cms-pastor-chris-container" class="lg:col-span-4 flex justify-center w-full">
-                    <div class="relative w-full max-w-sm mt-4 lg:mt-0">
+                <div id="cms-pastor-chris-container" class="hero-card-anim lg:col-span-4 flex justify-center w-full">
+                    <div class="relative w-full max-w-sm mt-4 lg:mt-0 transition-transform duration-500 hover:-translate-y-1.5">
                         <!-- Floating Top Gold Badge Icon -->
-                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 z-20 w-11 h-11 rounded-full bg-[#D99B26] text-white flex items-center justify-center shadow-lg border-4 border-white">
+                        <div class="hero-badge-pulse absolute -top-5 left-1/2 -translate-x-1/2 z-20 w-11 h-11 rounded-full bg-[#D99B26] text-white flex items-center justify-center shadow-lg border-4 border-white">
                             <i data-lucide="book-open" class="w-5 h-5"></i>
                         </div>
 
@@ -1140,7 +1231,18 @@
     <script>
         lucide.createIcons();
 
-        // 1. Scroll Progress
+        // 1. Scroll Progress + Active Top Nav Highlight
+        function syncTopNavHighlight() {
+            const homeLink = document.getElementById('nav-link-home');
+            const momentsLink = document.getElementById('nav-link-moments');
+            const momentsSec = document.getElementById('moments');
+            if (!homeLink || !momentsLink || !momentsSec) return;
+            const rect = momentsSec.getBoundingClientRect();
+            const inMoments = rect.top <= 160 && rect.bottom > 120;
+            homeLink.classList.toggle('nav-link-active', !inMoments);
+            momentsLink.classList.toggle('nav-link-active', inMoments);
+        }
+
         window.addEventListener('scroll', () => {
             const doc = document.documentElement;
             const top = doc.scrollTop || document.body.scrollTop;
@@ -1148,7 +1250,10 @@
             const progress = height > 0 ? (top / height) * 100 : 0;
             const bar = document.getElementById('scroll-progress');
             if (bar) bar.style.width = progress + '%';
-        });
+            syncTopNavHighlight();
+        }, { passive: true });
+        window.addEventListener('hashchange', syncTopNavHighlight);
+        syncTopNavHighlight();
 
         // 2. Hamburger Menu Toggle
         const mobileBtn = document.getElementById('mobile-menu-toggle');
